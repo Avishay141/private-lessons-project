@@ -32,6 +32,8 @@ $("#sbmt").on("click",function(){
   //  });
 
 
+
+
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
       //Registration is successful
       var user = firebase.auth().currentUser;
@@ -50,8 +52,11 @@ $("#sbmt").on("click",function(){
 
 
 
-      }).catch(e => console.log(e.message));
+       }).catch(e => console.log(e.message));
 
+  $("#email").val('');
+  $("#Password1").val('');
+  $("#email").val('');
   });
 
      
