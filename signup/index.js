@@ -54,9 +54,9 @@ $("#sbmt").on("click",function(){
 
        }).catch(e => console.log(e.message));
 
-  $("#email").val('');
-  $("#Password1").val('');
-  $("#email").val('');
+    $("#email").val('');
+    $("#Password1").val('');
+    $("#Password2").val('');
   });
 
      
