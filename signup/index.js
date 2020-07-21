@@ -49,14 +49,18 @@ $("#sbmt").on("click",function(){
          console.log("Error ocurred: ", error);
        });
       console.log("user created successfuly");
+      $('h3').append("user created successfuly");
+
+
+         //alert(e.message)
+
+       }).catch(e => $('h2').append(e.message)  );
 
 
 
-       }).catch(e => console.log(e.message));
-
-  $("#email").val('');
-  $("#Password1").val('');
-  $("#email").val('');
+    $("#email").val('');
+    $("#Password1").val('');
+    $("#Password2").val('');
   });
 
      
