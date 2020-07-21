@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Resplendissant
+Description: A two-column, fixed-width template suitable for business sites and blogs.
+Version    : 1.0
+Released   : 20080116
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Private Lessons for everyone</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<div id="logo">
+		<h1 id="#ProfileName1">Temporary Teacher Name</h1>
+		<h2>Private Lessons</h2>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+			<li><a href="#" accesskey="2" title="">Articles</a></li>
+		</ul>
+		<div id="search">
+			<form method="get" action="">
+				<fieldset>
+					<input id="s" type="text" name="s" value="" />
+					<input id="x" type="submit" value="Search" />
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<hr />
+	<div id="banner"><img src="images/img05.jpg" alt="" width="960" height="147" /></div>
+	<!-- start page -->
+	<div id="page">
+		<!-- start content -->
+		<div id="content">
+	
+				<section>
+					<h1 style="font-size: xx-large;">Lesson Details</h1>
+					<div class="container">
+						<div class="row">
+							<pay-det-field >Teacher Name: </pay-det-field>
+							<det-pay-result id="pay-teacher-name" class="col-4">temp data</det-pay-result>
+						</div>
+						<div class="row">
+							<pay-det-field>Date: </pay-det-field>
+							<det-pay-result id="pay-date" class="col-4">23/12/1991</det-pay-result>
+						</div>
+						<div class="row">
+							<pay-det-field>Time: </pay-det-field>
+							<det-pay-result id="pay-time" class="col-4">23:00</det-pay-result>
+						</div>
+						<div class="row">
+							<pay-det-field>Base Price: </pay-det-field>
+							<det-pay-result id="pay-base-price" class="col-4">100$</ddet-pay-resultiv>
+						</div>
+						<div class="row">
+							<pay-det-field>Total Price: </pay-det-field>
+							<det-pay-result id="pay-total-price" class="col-4">105$</det-pay-result>
+						</div>
+					</div>
+				</section>
+
+				<section >
+					<h1 style="font-size: xx-large;">Payment Details</h1>
+					<div class="form-group">
+						<input type="text" class="form-control w-50" id="pay-credit-name" placeholder="Name on card">
+						<span style="color:red" id="pay-credit-name-err">-name is empty-</span>
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control w-50" id="pay-credit-email" placeholder="name@example.com">
+						<span style="color:red" id="pay-credit-email-err">-email not good-</span>
+					</div>
+					<div class="form-group">
+						<input type="number" class="form-control w-50" id="pay-credit-number"
+							placeholder="1234-5678-1234-5678">
+						<span style="color:red" id="pay-credit-number-err">-Illegal card number-</span>
+					</div>
+					<h5 style="font-size: 18px;"> Expiry date: </h5>
+					<select name='expireMM' id='expireMM'>
+						<option value=''>Month</option>
+						<option value='01'>January</option>
+						<option value='02'>February</option>
+						<option value='03'>March</option>
+						<option value='04'>April</option>
+						<option value='05'>May</option>
+						<option value='06'>June</option>
+						<option value='07'>July</option>
+						<option value='08'>August</option>
+						<option value='09'>September</option>
+						<option value='10'>October</option>
+						<option value='11'>November</option>
+						<option value='12'>December</option>
+					</select>
+					<select name='expireYY' id='expireYY'>
+						<option value=''>Year</option>
+						<option value='10'>2010</option>
+						<option value='11'>2011</option>
+						<option value='12'>2012</option>
+					</select>
+					<input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4" />
+					<div class="form-group">
+						<div class="col-xs-2"><input type="number" class="form-control" id="pay-credit-cvc" placeholder="CVC" style="margin-top: 20px;"></div>
+						<span style="color:red" id="pay-credit-cvc">-Illegal CVC-</span>
+					</div>
+					<button id="orderButton" type="button" class="btn btn-success">Order</button>
+					</form>
+				</section>
+				<section class="col-2"></section>
+
+			
+		</div>
+
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"></script>
+		<!-- end page - may use footer-class if needed -->
+</body>
+
+</html>
