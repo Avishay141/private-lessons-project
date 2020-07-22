@@ -2,33 +2,39 @@
 const  db = firebase.database();
 
 //profile attributes
+var name ="";
+var about_me ="";
 var languages_I_teach = [];
 var also_speak = [];
 var homeCountry ="";
-var dates = getDates(new Date());
+var lessonPrice="";
 var weekCalenders = initWeekCalendersObjects();
 var weekCalenderIndx = 0;
 var availableSlots =[];
+var skype_id ="";
 
 
 var availableColor = "rgb(0, 153, 51)";
 var notAvailablrColor = "rgb(194, 194, 163)";
 
-build_calender();
+
 
 var userID;
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
 
-     //window.location = "../login/index.html";
+     window.location = "../login/index.html";
   } else {
     userID = user.uid;
     console.log("this line shoud be executed once for each login");
   }
 });
 
+
 db.ref("Users/Teachers/").on("value", get_profile_info_from_db);
 
+
+build_calender();
 
 /* ---------------- Buttons callbacks -------------- */
 
@@ -49,12 +55,15 @@ $("#save_btn").on("click",function(){
   console.log("also_speak: " + also_speak);
   path = "Users/Teachers/"+userID+"/";
 
-  db.ref(path).update({'name':$(".Name").val()});
-  db.ref(path).update({'homeCountry':homeCountry});
-  db.ref(path).update({'languages_I_teach':languages_I_teach});
-  db.ref(path).update({'alsoSpeak':also_speak});
-  db.ref(path).update({'lessonPrice':$(".Lesson_price").val()});
-  db.ref(path).update({'availableSlots':availableSlots});
+db.ref(path).update({'name':$(".Name").val(),
+                    'homeCountry':homeCountry,
+                    'languages_I_teach':languages_I_teach,
+                    'alsoSpeak':also_speak,
+                    'lessonPrice':$(".Lesson_price").val(),
+                    'availableSlots':availableSlots,
+                    'aboutMe': $(".about_me_txt").val(),
+                    'skypeID': $("#skype_id").val()
+                  });
 
 
 });
@@ -105,7 +114,12 @@ $("#date_right").on("click",function(event){
 
 // btn for testing only
 $("#test").on("click",function(event){
-  $( ".booking_calneder" ).empty();
+
+  var items=document.getElementsByName("teach");
+  for(var i=0; i<items.length; i++){
+    if(items[i].type=='checkbox' && items[i].value=="Akan")
+      items[i].checked = true;
+  }
 });
 
 
@@ -209,7 +223,7 @@ function initWeekCalendersObjects(){
   var objectArr = new Array(4);
   for(var i=0; i< objectArr.length; i++){
     var obj = {firstDay : new Date()};
-    obj.firstDay.setDate(new Date().getDate() + i*7);
+    obj.firstDay.setDate(getSunday().getDate() + i*7);
     objectArr[i] = obj;
 }
   return objectArr;
@@ -231,7 +245,7 @@ function read(data){
 function upadate_array_by_checkbox(name, arr){
   var items=document.getElementsByName(name);
   for(var i=0; i<items.length; i++){
-    if(items[i].type=='checkbox' && items[i].checked==true)
+    if(items[i].type=='checkbox' && items[i].checked==true && !isElemInArray(items[i].value, arr))
       arr.push(items[i].value);
   }
 }
@@ -262,8 +276,96 @@ function get_profile_info_from_db(data){
 
   var teachers = data.val();
   var current_teacher = teachers[userID];
-  console.log("email: " +current_teacher.userEmail);
+
+   name = current_teacher.name;
+   about_me = current_teacher.aboutMe;
+   skype_id = current_teacher.skypeID;
+   homeCountry = current_teacher.homeCountry;
+   lessonPrice = current_teacher.lessonPrice;
+   languages_I_teach = current_teacher.languages_I_teach;
+   also_speak = current_teacher.alsoSpeak;
+   availableSlots = current_teacher.availableSlots;
 
 
+   fix_undefined_variavles();
 
+  $("#homeCountry").val(homeCountry);
+  document.getElementById("Name").value = name;
+  document.getElementById("lesson_price").value = lessonPrice;
+  document.getElementById("about_me").value = about_me;
+  document.getElementById("skype_id").value = skype_id;
+
+  console.log("read also_speak: " + also_speak);
+  console.log("read languages_I_teach: " + languages_I_teach);
+  console.log("read availableSlots: " + availableSlots);
+
+  updateSlotsColors();
+  update_profile_checkboxes();
+
+
+}
+
+function update_profile_checkboxes(){
+  var items=document.getElementsByName("teach");
+
+  for(var i = 0; i < languages_I_teach.length; i++){
+    for(var j = 0; j < items.length; j++ ){
+
+      if(items[j].type=='checkbox' && items[j].value==languages_I_teach[i])
+          items[j].checked = true;
+    }
+  }
+
+  var items=document.getElementsByName("speak");
+  for(var i = 0; i < also_speak.length; i++){
+    for(var j = 0; j < items.length; j++ ){
+      if(items[j].type=='checkbox' && items[j].value==also_speak[i])
+          items[j].checked = true;
+
+    }
+  }
+
+}
+
+function getSunday(){
+  var today = new Date();
+  var  diff = today.getDate() -  today.getDay();
+  var sunday =  new Date(today.setDate(diff));
+  console.log("first day of this week: " + sunday);
+  return sunday;
+
+}
+
+function fix_undefined_variavles(){
+  if(!languages_I_teach)
+      languages_I_teach = [];
+
+  if(!also_speak)
+      also_speak = [];
+
+  if(!homeCountry)
+        homeCountry ="";
+
+  if(!availableSlots)
+        availableSlots = [];
+
+  if(!skype_id)
+        skype_id ="";
+
+  if(!name)
+          name ="";
+  if(!about_me)
+        about_me ="";
+  if(!lessonPrice)
+          lessonPrice ="";
+
+}
+
+function isElemInArray(elem, arr){
+  for(var i =0; i < arr.length; i++){
+    if(arr[i] == elem)
+      return true;
+  }
+
+  return false;
 }

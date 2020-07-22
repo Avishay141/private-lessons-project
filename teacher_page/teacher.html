@@ -30,11 +30,11 @@
 
 
         <h5 class="profile_title">Profile</h5>
-        <textarea class="Name" rows="1" placeholder="Name" style="width: 100%"></textarea>
+        <textarea class="Name" rows="1" placeholder="Name" style="width: 100%" id="Name"></textarea>
         <div class="dropdown" id="Home_country">
           <form>
             <label>Home Country:</label>
-            <select class="home_country">
+            <select class="home_country" id="homeCountry">
               <option value="Afghanistan">Afghanistan</option>
               <option value="Albania">Albania</option>
               <option value="Algeria">Algeria</option>
@@ -660,8 +660,16 @@
 
           </ul>
         </div>
+        <div class="price">
+          <label>Lesson price:</label>
+          <textarea class="Lesson_price" rows="1" placeholder="Lesson price" style="width: 100%" id="lesson_price"></textarea>
+        </div>
+        <div class="skype">
+          <label>Skype ID:</label>
+          <textarea  rows="1" placeholder="Lesson price" style="width: 100%" id="skype_id"></textarea>
+        </div>
 
-        <textarea class="Lesson_price" rows="1" placeholder="Lesson price" style="width: 100%"></textarea>
+
       </div>
 
 
@@ -671,7 +679,7 @@
     <div class="row about_me">
       <div class="col-sm-6 about_me">
         <h5 class="about_me_title">About me</h5>
-        <textarea class="about_me_txt" rows="8" placeholder="Tell us about yourself..." style="width: 100%"></textarea>
+        <textarea class="about_me_txt" rows="8" placeholder="Tell us about yourself..." style="width: 100%" id="about_me"></textarea>
       </div>
     </div>
 
