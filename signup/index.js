@@ -53,7 +53,7 @@ var user_created_successfully = false;
 
 
 
-	 $("#email").val('');
-	 $("#Password1").val('');
-	 $("#Password2").val('');
+	 // $("#email").val('');
+	 // $("#Password1").val('');
+	 // $("#Password2").val('');
  });
