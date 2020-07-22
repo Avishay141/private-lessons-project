@@ -17,44 +17,7 @@ $("#login_btn").on("click",function(){
 
 $("#sign_up_btn").on("click",function(){
 
-  var email = $(".Email_input").val();
-  var password = $(".Password_input").val();
-
-  var userType = $('input[name=userTypeRadios]:checked').val();
-  // var userID =  email.split(".").join("*");
-  //
-  //
-  //
-  // var path = "Users/"+ userType +"s/" + userID;
-  //  console.log("db path: " + path);
-  //  //var db = firebase.database().ref();
-  //  db.child(path).set({
-  //    userEmail: email,
-  //    userType: userType
-  //  }).catch(function(error){
-  //    console.log("Error ocurred: ", error);
-  //  });
-
-
-  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-      //Registration is successful
-      var user = firebase.auth().currentUser;
-       var userID = user.uid;
-
-      var path = "Users/"+ userType +"s/" + userID;
-       console.log("db path: " + path);
-       //var db = firebase.database().ref();
-       db.child(path).set({
-         userEmail: email,
-         userType: userType
-       }).catch(function(error){
-         console.log("Error ocurred: ", error);
-       });
-      console.log("user created successfuly");
-
-
-
-      }).catch(e => console.log(e.message));
+     window.location = "../signup/index.html";
 
   });
 
