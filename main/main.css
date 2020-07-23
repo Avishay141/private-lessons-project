@@ -74,3 +74,10 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     margin-top: -1px;
 }
 
+
+.profile {
+    border: 2px solid #222222;
+    padding: 5px;
+    margin: 5px;
+    width: 50%;
+  }
