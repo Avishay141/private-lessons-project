@@ -44,7 +44,7 @@ var user_created_successfully = false;
 			if(user_created_successfully){
 				console.log("user created successfuly");
 				$('h3').append("user created successfuly");
-				window.location = "../main/main.html";
+				window.location = "../main/main.html?uid="+userID;
 			}
 
 
