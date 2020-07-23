@@ -48,6 +48,7 @@ function read(data) {
         teachers[id].homeCountry == selected_Origin) {
         res.push({ name: teachers[id].name, email: teachers[id].userEmail , teacherId: id});
         res_size++;
+       
       }
     }
   }
@@ -72,15 +73,18 @@ function update_html_profiles(res, res_size) {
         + "<div class=\"card-body\">"
         + "<h4 class=\"card-title\">" + res[x].name + "</h4>"
         + "<p class=\"card-text\">Email:" + res[x].email + " \n</p>"
-        + "<a href=\"#\" id="+ res.teacherId +" onclick=\"profile_btn_func(this.id)\" class=\"btn btn-primary\">See Profile</a>"
+        + "<button type=\"button\" id="+ res[x].teacherId +" onclick=\"profile_btn_func(this.id)\" class=\"btn btn-primary\">See Profile</button>"
         + "</div>"
         + "</div>";
       $(".profiles").append(html_string);
+      console.log(" " + res[x].teacherId);
     }
   }
 
-  function profile_btn_func(teacherID){
-    window.location = "../teacher_info/teacher_info.html?uid=" + teacherID;
+  function profile_btn_func(tid){
+    var teacher_ID = $(this).attr('id');
+    //console.log(" " + teacher_ID);
+    window.location = "../teacher_info/info.html";//?uid=" + "ZjlEObmuRrR3Kb9ZNjKfKJqr1aI3";
   }
 
 
