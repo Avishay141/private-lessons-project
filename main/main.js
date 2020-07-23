@@ -1,4 +1,5 @@
 const db = firebase.database();
+var userID = get_userID_from_url();
 //var database = firebase.database();
 const
   range = document.getElementById('rangeSlider'),
@@ -24,6 +25,8 @@ $("#edit_teacher_profile").on("click", function () {
 
 
 
+
+
 function read(data) {
 
   var selected_Language = $("#ddl_language").children("option:selected").val();
@@ -41,9 +44,13 @@ function read(data) {
   var res_size = 0;
   for (var i = 0; i < teachers_ids.length; i++) {
     id = teachers_ids[i];
+    
     if (teachers[id].languages_I_teach && teachers[id].lessonPrice && teachers[id].homeCountry)
-      if (search_language(teachers[id].languages_I_teach,selected_Language) && teachers[id].lessonPrice <= selected_Price &&
-        teachers[id].homeCountry == selected_Origin) {
+      if (search_language(teachers[id].languages_I_teach,selected_Language) && 
+        teachers[id].lessonPrice <= selected_Price &&
+        teachers[id].homeCountry == selected_Origin) 
+        {
+        
         res.push({ name: teachers[id].name, email: teachers[id].userEmail });
         console.log("res item number: " + res_size + " name:" + res[res_size].name + " email: " + res[res_size].email + " \n");
         res_size++;
@@ -56,9 +63,10 @@ function read(data) {
 }
 
 function search_language(languages,selected_Language){
-  for(var i=0; i<languages.length();i++){
-    if(languages[i]==selected_Language)
+  for(var i=0; i<languages.length;i++){
+    if(languages[i]==selected_Language){
       return true;
+    }
   }
   return false;
 }
@@ -85,18 +93,26 @@ function update_html_profiles(name, email,res_size){
     
   }
   
-  $(".profiles1").append(html_string);
+  //$(".profiles1").append(html_string);
 }
 
-  //////////////----
-  // this is the array that will hold all the profile objects
-/*<div class="card" style="width:250px" imgstyle= >
-              <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
-              <div class="card-body">
-                <h4 class="card-title">John Doe</h4>
-                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
-              </div>
-            </div>
 
-*/
+
+/*
+var userID;
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!user) {
+
+     window.location = "../login/index.html";
+  } else {
+    userID = user.uid;
+    console.log("this line shoud be executed once for each login");
+  }
+});*/
+
+
+function get_userID_from_url(){
+  var res = location.search.substring(1).split("=")[1];
+  console.log("userID from url: " + res);
+  return res;
+}
