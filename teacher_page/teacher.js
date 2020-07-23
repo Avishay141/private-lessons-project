@@ -8,18 +8,20 @@ var languages_I_teach = [];
 var also_speak = [];
 var homeCountry ="";
 var lessonPrice="";
-var weekCalenders = initWeekCalendersObjects();
-var weekCalenderIndx = 0;
 var availableSlots =[];
 var skype_id ="";
+var userEmail="";
+
+var weekCalenders = initWeekCalendersObjects();
+var weekCalenderIndx = 0;
 
 
 var availableColor = "rgb(0, 153, 51)";
 var notAvailablrColor = "rgb(194, 194, 163)";
+var userID = get_userID_from_url();
 
 
 
-var userID;
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
 
@@ -30,8 +32,11 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+console.log("userID: " +userID);
+var teacher_path = "Users/Teachers/" + userID +"/";
+console.log("teacher_path: " +teacher_path);
 
-db.ref("Users/Teachers/").on("value", get_profile_info_from_db);
+db.ref(teacher_path).on("value", get_profile_info_from_db);
 
 
 build_calender();
@@ -62,8 +67,12 @@ db.ref(path).update({'name':$(".Name").val(),
                     'lessonPrice':$(".Lesson_price").val(),
                     'availableSlots':availableSlots,
                     'aboutMe': $(".about_me_txt").val(),
-                    'skypeID': $("#skype_id").val()
+                    'skypeID': $("#skype_id").val(),
+                    'userType': "Teacher",
+                    'userEmail':userEmail
                   });
+
+
 
 
 });
@@ -216,9 +225,6 @@ function build_calender(){
 
 }
 
-
-
-
 function initWeekCalendersObjects(){
   var objectArr = new Array(4);
   for(var i=0; i< objectArr.length; i++){
@@ -272,19 +278,25 @@ function updateSlotsColors(){
 }
 
 function get_profile_info_from_db(data){
-  console.log("enter get_profile_info_from_db");
+  console.log("enter get_profile_info_from_db @@@@@@@");
+  console.log("userID: " + userID);
+  // var teachers = data.val();
+  // var current_teacher = teachers[userID];
+  var current_teacher = data.val();
+  console.log("current_teacher: " + current_teacher);
+  var keys = Object.keys(current_teacher);
 
-  var teachers = data.val();
-  var current_teacher = teachers[userID];
+  console.log("keys: " + keys);
 
-   name = current_teacher.name;
-   about_me = current_teacher.aboutMe;
-   skype_id = current_teacher.skypeID;
-   homeCountry = current_teacher.homeCountry;
-   lessonPrice = current_teacher.lessonPrice;
-   languages_I_teach = current_teacher.languages_I_teach;
-   also_speak = current_teacher.alsoSpeak;
-   availableSlots = current_teacher.availableSlots;
+  name = current_teacher['name'];
+  about_me = current_teacher['aboutMe'];
+  skype_id = current_teacher['skypeID'];
+  homeCountry = current_teacher['homeCountry'];
+  lessonPrice = current_teacher['lessonPrice'];
+  languages_I_teach = current_teacher['languages_I_teach'];
+  also_speak = current_teacher['alsoSpeak'];
+  availableSlots = current_teacher['availableSlots'];
+  userEmail =current_teacher['userEmail'];
 
 
    fix_undefined_variavles();
@@ -368,4 +380,10 @@ function isElemInArray(elem, arr){
   }
 
   return false;
+}
+
+function get_userID_from_url(){
+  var res = location.search.substring(1).split("=")[1];
+  console.log("userID from url: " + res);
+  return res;
 }

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="teacher.css">
 
-  <title>Hello, world!</title>
+  <title>teacher page</title>
 </head>
 
 <body>
@@ -697,7 +697,7 @@
   </div>
 
 
-    <button type="button" class="btn btn-primary" id="save_btn">Save Changes</button>
+    <button type="button" class="btn btn-primary" id="save_btn" data-toggle="modal" data-target="#exampleModalCenter">Save Changes</button>
 
 
 
@@ -719,7 +719,19 @@
     <button type="button" class="btn btn-primary" id="test" >test</button>
 
 
-
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            Changes saved successfully
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
