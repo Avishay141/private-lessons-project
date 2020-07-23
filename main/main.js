@@ -116,3 +116,7 @@ function get_userID_from_url(){
   console.log("userID from url: " + res);
   return res;
 }
+
+$("#logout_btn").on("click",function(){
+  firebase.auth().signOut();
+});
