@@ -19,7 +19,7 @@ range.addEventListener('input', setValue);
 
 /////////////---------- Read Teachers for search
 $("#edit_teacher_profile").on("click", function () {
-  window.location = "../teacher_page/teacher.html";
+  window.location = "../teacher_page/teacher.html?uid="+user.uid;
 });
 
 
@@ -41,8 +41,8 @@ function read(data) {
   var res_size = 0;
   for (var i = 0; i < teachers_ids.length; i++) {
     id = teachers_ids[i];
-    if (teachers[id].languages && teachers[id].lessonPrice && teachers[id].homeCountry)
-      if (teachers[id].languages[selected_Language] && teachers[id].lessonPrice <= selected_Price &&
+    if (teachers[id].languages_I_teach && teachers[id].lessonPrice && teachers[id].homeCountry)
+      if (search_language(teachers[id].languages_I_teach,selected_Language) && teachers[id].lessonPrice <= selected_Price &&
         teachers[id].homeCountry == selected_Origin) {
         res.push({ name: teachers[id].name, email: teachers[id].userEmail });
         console.log("res item number: " + res_size + " name:" + res[res_size].name + " email: " + res[res_size].email + " \n");
@@ -54,6 +54,15 @@ function read(data) {
 
 
 }
+
+function search_language(languages,selected_Language){
+  for(var i=0; i<languages.length();i++){
+    if(languages[i]==selected_Language)
+      return true;
+  }
+  return false;
+}
+
 
 $("#searchBtn").on("click", function (event) {
   db.ref("Users/Teachers/").on("value", read);
@@ -68,7 +77,7 @@ function update_html_profiles(name, email,res_size){
       + "<img class=\"card-img-top\" src=\"https://www.w3schools.com/bootstrap4/img_avatar1.png\" alt=\"Card image\" style=\"width:100%\">"
       + "<div class=\"card-body\">"
       + "<h4 class=\"card-title\">" + name + "</h4>"
-      + "<p class=\"card-text\">Some example text some example text. John Doe is an architect and engineer</p>"
+      + "<p class=\"card-text\">Email:" + email +  " \n</p>"
       + "<a href=\"#\" class=\"btn btn-primary\">See Profile</a>"
       + "</div>"
       + "</div>";
