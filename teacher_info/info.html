@@ -8,44 +8,86 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="teacherInfo.css">
+  <link rel="stylesheet" href="info.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Sacramento&display=swap" rel="stylesheet">
 
   <title>teacher info</title>
 </head>
 
 <body>
-	<div>
-		<div class="row calender">
-			<div class="col-sm-10 calender">
-				<h5 class="Personal_info">Personal information</h5>
-				<p>
-					info...
-				</p>
 
-			</div>
-		</div>
-	</div>
+  <section class="details_section">
+
+  <div class="container">
+    <h1 class="page_title">Teacher information</h1>
+    <div class="card profile_card">
+      <div class="row personal_info">
+        <div class="col-sm-5 personal_info">
+          <div class="form-check">
+            <h5 class="details" id="name_val"> </h5>
+
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="homeCountry_title"> From  </label>
+            <label class="details" id="homeCountry_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="languages_I_teach_title"> Teaches </label>
+            <label class="details" id="languages_I_teach_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="also_speak_title"> Also speak </label>
+            <label class="details" id="also_speak_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="lessonPrice_title"> Lesson price: </label>
+            <label class="details" id="lessonPrice_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="skype_id_title"> Skype ID: </label>
+            <label class="details" id="skype_id_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="email_title"> Email: </label>
+            <label class="details" id="email_val"> </label>
+          </div>
+
+          <div class="form-check">
+            <label class="details" id="about_me_title"> About me: </label>
+            <label class="details" id="about_me_val"> </label>
+          </div>
+
+        </div>
+
+        <div class="col-sm-4 profile">
+          <img src="https://api.time.com/wp-content/uploads/2019/11/fish-with-human-face-tik-tok-video.jpg" class="card-img-top" alt="...">
+        </div>
+      </div>
+    </div>
 
 
+    <div>
+      <div class="row calender">
+        <div class="col-sm-10 calender">
+          <h5 class="calender_title">Calendar</h5>
+          <button type="button" class="btn btn-primary arrow" id="date_left">
+            < </button> <button type="button" class="btn btn-primary arrow" id="date_right"> >
+          </button>
+          <table class="booking_calneder"> </table>
 
+        </div>
+      </div>
+    </div>
 
-
-
-
-<div>
-	<div class="row calender">
-		<div class="col-sm-10 calender">
-			<h5 class="calender_title">Calender</h5>
-			<button type="button" class="btn btn-primary arrow" id="date_left">
-				< </button> <button type="button" class="btn btn-primary arrow" id="date_right"> >
-			</button>
-			<table class="booking_calneder"> </table>
-
-		</div>
-	</div>
-</div>
-
-
+      <button type="button" class="btn btn-primary" id="book_btn">Book</button>
+  </div>
+</section>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -81,5 +123,6 @@
   </script>
 
 
-  <script src="teacherInfo.js" charset="utf-8"></script>
+  <script src="info.js" charset="utf-8"></script>
+
 </html>

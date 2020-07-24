@@ -35,3 +35,27 @@ text-align: center;
 #date_left{
 text-align: center;
 }
+
+.details{
+	margin: 5px;
+}
+
+.page_title{
+	text-align: center;
+	margin: 50px;
+	font-family: 'Great Vibes', cursive;
+	font-size: 90px;
+}
+
+.row.personal_info{
+	 font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.row{
+		margin: 20px;
+		background-color: #ECD6D9;
+	}
+
+/* body{
+		 background-image: url("https://i0.wp.com/www.importanceoflanguages.com/wp-content/uploads/language-personal-communication.jpg?w=1200&ssl=1");
+} */

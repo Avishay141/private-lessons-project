@@ -17,6 +17,7 @@ var bookedColor = "rgb(51, 133, 255)";
 
 var weekCalenders = initWeekCalendersObjects();
 var weekCalenderIndx = 0;
+var bookedIndex = 0;
 var chosenSolt ="";
 
 var teacherID = get_userID_from_url();
@@ -33,7 +34,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-db.ref("Users/teachers/"+ teacherID + "/").on("value", get_profile_info_from_db);
+db.ref("Users/Teachers/"+ teacherID + "/").on("value", get_profile_info_from_db);
 
 build_calender();
 
@@ -57,6 +58,7 @@ function calender_btn_clicked(event){
   else{
       $(event.delegateTarget ).css( "background-color", bookedColor);
       chosenSolt  = $(this).attr('id');
+      bookedIndex = weekCalenderIndx;
   }
 
 
@@ -133,9 +135,7 @@ function build_calender(){
       if( j == 0 )
             table +='<td class="hours_cells">' +hours[i]+'</td>';
       else{
-        //table += '<td> <button type="button" class="calender_btn" data-day="'+j+'" data-hour="'+i+'"></button></td>';
         var temp_id = temp[j-1].getDate()+'.'+(temp[j-1].getMonth()+1)+"_day-"+days[j-1]+"_hour-"+hours[i];
-
         table += '<td> <button type="button" class="calender_btn"  id="'+temp_id+'"></button></td>';
 
       }
@@ -188,6 +188,9 @@ function updateSlotsColors(){
       slot.style.background=availableColor;
 
   }
+
+  if(chosenSolt != "" && bookedIndex == weekCalenderIndx)
+   document.getElementById(chosenSolt).style.background=bookedColor;
 }
 
 function get_userID_from_url(){
@@ -221,17 +224,41 @@ function get_profile_info_from_db(data){
    fix_undefined_variavles();
 
   $("#homeCountry").val(homeCountry);
-  document.getElementById("Name").value = name;
-  document.getElementById("lesson_price").value = lessonPrice;
-  document.getElementById("about_me").value = about_me;
-  document.getElementById("skype_id").value = skype_id;
+  document.getElementById("name_val").innerHTML  = name;
+  document.getElementById("homeCountry_val").innerHTML  = homeCountry;
+  document.getElementById("languages_I_teach_val").innerHTML  = languages_I_teach;
+  document.getElementById("also_speak_val").innerHTML = also_speak;
+  document.getElementById("lessonPrice_val").innerHTML = lessonPrice;
+  document.getElementById("about_me_val").innerHTML = about_me;
+  document.getElementById("skype_id_val").innerHTML = skype_id;
+  document.getElementById("email_val").innerHTML = userEmail;
 
-  console.log("read also_speak: " + also_speak);
-  console.log("read languages_I_teach: " + languages_I_teach);
-  console.log("read availableSlots: " + availableSlots);
 
   updateSlotsColors();
-  update_profile_checkboxes();
 
+}
+
+function fix_undefined_variavles(){
+  if(!languages_I_teach)
+      languages_I_teach = [];
+
+  if(!also_speak)
+      also_speak = [];
+
+  if(!homeCountry)
+        homeCountry ="";
+
+  if(!availableSlots)
+        availableSlots = [];
+
+  if(!skype_id)
+        skype_id ="";
+
+  if(!name)
+          name ="";
+  if(!about_me)
+        about_me ="";
+  if(!lessonPrice)
+          lessonPrice ="";
 
 }
