@@ -1,9 +1,10 @@
 
 
-const  db = firebase.database().ref();
+const  db = firebase.database();
 var userID = get_userID_from_url();
 var email ="";
 var skypeID ="";
+const userType = "Student";
 //alert(userId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
@@ -30,13 +31,30 @@ db.ref(student_path).on("value", getInfo);
 
 $("#updt").click(function(){
   //block of code that runs when the click event triggers
-	firebase.database().ref(student_path).set({
-    userEmail: email,
-    skypeID: skypeID
-  });
+
+  	console.log("enter update function");
+	 email = $("#email").val();
+	 skypeID = $("#skype_id").val();
+	
+	 	console.log("email input: "+email);
+	 	console.log("skype input: "+skypeID);
+
+  		db.ref(student_path).set({
+				userEmail: email,
+				userType: userType,
+				skypeID: skypeID
+			}).catch(function(error){
+				alert("Error ocurred: ", error);
+			});
+
+			alert('Profile Update Success');
+
 
 });
 
+
+
+	
 
 
 
@@ -47,7 +65,7 @@ function getInfo(data) {
   // var teachers = data.val();
   // var current_teacher = teachers[userID];
   var current_user = data.val();
-  console.log("current_teacher: " + current_user);
+  console.log("current_user: " + current_user);
   var keys = Object.keys(current_user);
 
   console.log("keys: " + keys);
@@ -75,3 +93,9 @@ function get_userID_from_url(){
   console.log("userID from url: " + res);
   return res;
 }
+
+
+
+$("#main").on("click", function () {
+  window.location = "../main/main.html?uid=" + userID;
+});
