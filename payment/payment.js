@@ -2,16 +2,17 @@ const  db = firebase.database();
 var userID;
 
 //profile attributes
-var name ="";
-var about_me ="";
-var languages_I_teach = [];
-var also_speak = [];
-var homeCountry ="";
-var lessonPrice="";
-var availableSlots =[];
-var skype_id ="";
-var userEmail="";
+var teacher_id='';
+var teacher_name='';
+var class_day='';
+var class_hour='';
+var teacher_price='';
+var teacher_email='';
 
+var bookedClassesT=[];
+var bookedClassesS=[];
+var availableSlots=[];
+var fullDate='';
 
 
 $(document).ready(function(){
@@ -19,8 +20,23 @@ $(document).ready(function(){
     $('#pay-credit-email-err').hide();
     $('#pay-credit-number-err').hide();
     $('#pay-credit-cvc-err').hide();
+    $('#success-payment').hide();
+    get_teacher_id_from_url();
+    db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
+
 });
 
+function get_lesson_info_from_db(data) {
+    var teacher_info  = data.val();
+    teacher_price=teacher_info.lessonPrice;
+    teacher_name = teacher_info.name;
+    teacher_email = teacher_info.userEmail;
+    bookedClasses = teacher_info.bookedClasses;
+    availableSlots = teacher_info.availableSlots;
+
+    get_class_time_from_url();
+    fill_class_data();
+}
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (!user) {
@@ -32,72 +48,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
   });
 
-  
-  db.ref("Users/Teachers/"+ userID + "/").on("value", get_profile_info_from_db);
-  
-function get_profile_info_from_db(data){
-    console.log("enter get_profile_info_from_db @@@@@@@");
-    console.log("userID: " + userID);
-    // var teachers = data.val();
-    // var current_teacher = teachers[userID];
-    var current_teacher = data.val();
-    console.log("current_teacher: " + current_teacher);
-    var keys = Object.keys(current_teacher);
-  
-    console.log("keys: " + keys);
-  
-    name = current_teacher['name'];
-    about_me = current_teacher['aboutMe'];
-    skype_id = current_teacher['skypeID'];
-    homeCountry = current_teacher['homeCountry'];
-    lessonPrice = current_teacher['lessonPrice'];
-    languages_I_teach = current_teacher['languages_I_teach'];
-    also_speak = current_teacher['alsoSpeak'];
-    availableSlots = current_teacher['availableSlots'];
-    userEmail =current_teacher['userEmail'];
-  
-  
-     fix_undefined_variavles();
-  
-    $("#homeCountry").val(homeCountry);
-    document.getElementById("name_val").innerHTML  = name;
-    document.getElementById("homeCountry_val").innerHTML  = homeCountry;
-    document.getElementById("languages_I_teach_val").innerHTML  = languages_I_teach;
-    document.getElementById("also_speak_val").innerHTML = also_speak;
-    document.getElementById("lessonPrice_val").innerHTML = lessonPrice;
-    document.getElementById("about_me_val").innerHTML = about_me;
-    document.getElementById("skype_id_val").innerHTML = skype_id;
-    document.getElementById("email_val").innerHTML = userEmail;
-    
-  }
-
-
-  function fix_undefined_variavles(){
-    if(!languages_I_teach)
-        languages_I_teach = [];
-  
-    if(!also_speak)
-        also_speak = [];
-  
-    if(!homeCountry)
-          homeCountry ="";
-  
-    if(!availableSlots)
-          availableSlots = [];
-  
-    if(!skype_id)
-          skype_id ="";
-  
-    if(!name)
-            name ="";
-    if(!about_me)
-          about_me ="";
-    if(!lessonPrice)
-            lessonPrice ="";
-  
-  }
-  
-
   $("#orderButton").click(function(){
     console.log("form submit attempt");
     let formName = $('#pay-credit-name-input').val().trim();
@@ -106,19 +56,60 @@ function get_profile_info_from_db(data){
     let formCvc = $('#pay-credit-cvc-input').val();
     console.log ("variables are:  1"+ formCreditNum)
     let legal=true;
+    
+     legal = handleEmail(formEmail,legal);
+     legal = handleName(formName,legal);
+     legal = handleCredit(formCreditNum,legal);
+     legal = handleCvc(formCvc,legal);
+    
+    if (!legal){
+        console.log("failed form");
+        return false;
+    }
+    $('#success-payment').show(); 
+    update_db();
+    
+    
+  });
 
-    if(formName=='')
+
+  function get_teacher_id_from_url(){
+    teacher_id = location.search.substring(0).split("=")[1];
+    console.log("teacher_id from url: " + teacher_id);
+  }
+
+  function fill_class_data(){
+    console.log("enter data fillllll " + teacher_name);
+    document.getElementById('pay-teacher-name').innerHTML = (' ' + teacher_name.toString());
+    document.getElementById('pay-teacher-email').innerHTML = (' ' + teacher_email);
+    document.getElementById('pay-date').innerHTML = (' ' + class_day);
+    document.getElementById('pay-time').innerHTML = (' ' + class_hour);
+    document.getElementById('pay-base-price').innerHTML = (' ' + teacher_price);
+    document.getElementById('pay-total-price').innerHTML = (' ' + teacher_price*1.06);
+  }
+  
+  function get_class_time_from_url(){
+    fullDate = location.search.substring(0).split("=")[2];
+    console.log("class_day from url: " + fullDate);
+    class_day =  fullDate.substring(0).split("_")[0];
+    console.log("class_day from url: " + class_day);
+    class_hour = fullDate.substring(0).split("-").pop();
+    console.log("class_time from urllll: " + class_hour);
+  }
+  
+
+  function handleName(localName,isLegal){
+    if(localName=='' || localName==null )
     { 
         $('#pay-credit-name-err').html('<span class="err">-name is empty!-</span>');
         $('#pay-credit-name-err').show();
-        legal=false;
+        isLegal=false;
+        console.log("failed form email");
     }else{
       $('#name-err').hide();
     }
-    legal = handleEmail(formEmail,legal);
-    legal = handleCredit(formCreditNum,legal);
-    legal = handleCvc(formCvc,legal);
-  });
+    return isLegal;
+  }
 
   function handleEmail(localEmail,isLegal){
     if(validateEmail(localEmail)==false || localEmail=='' || localEmail==null )
@@ -126,6 +117,7 @@ function get_profile_info_from_db(data){
         $('#pay-credit-email-err').html('<span class="err">-Please fill a valid email-</span>')
         $('#pay-credit-email-err').show();
         isLegal=false;
+        console.log("failed form email");
     }else{
        $('#pay-credit-email-err').hide();
     }
@@ -137,6 +129,7 @@ function get_profile_info_from_db(data){
         $('#pay-credit-number-err').html('<span class="err">-Please fill a valid credit card (numerics only) -</span>')
         $('#pay-credit-number-err').show();
         isLegal=false;
+        console.log("failed form credit");
     }else{
         $('#pay-credit-number-err').hide();
    }
@@ -148,6 +141,7 @@ function get_profile_info_from_db(data){
         $('#pay-credit-cvc-err').html('<span class="err">-Please fill a valid CVC-</span>')
         $('#pay-credit-cvc-err').show();
         isLegal=false;
+        console.log("failed form cvc");
     }else{
         $('#pay-credit-cvc-err').hide();
    }
@@ -182,3 +176,30 @@ function get_profile_info_from_db(data){
     }
     return true;
   }
+
+
+function update_db(){
+    console.log("enter update_db");
+            if (!bookedClassesT){
+                bookedClassesT=[];
+            }
+            bookedClassesT.push(fullDate);    
+                //update student
+            if (!bookedClassesS){
+                bookedClassesS=[];
+            }
+            bookedClassesS.push(fullDate);
+            removeSlot(fullDate);
+            db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': fullDate});
+            db.ref("Users/Teachers/"+ teacher_id + "/").update({'availableSlots': availableSlots});
+            db.ref("Users/Teachers/"+ userID + "/").update({'bookedClasses': fullDate});   
+}
+// removes the slot from the availableSlots array
+function removeSlot(slot){
+    const index = availableSlots.indexOf(slot);
+    console.log("index slot   " + index);
+    if (index > -1) {
+      availableSlots.splice(index, 1);
+      console.log("available slots   " + availableSlots.toString());
+    } 
+}

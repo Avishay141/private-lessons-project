@@ -14,14 +14,14 @@ Released   : 20080116
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Private Lessons for everyone</title>
+	<title>Lesson Checkout</title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link href="payment.css" rel="stylesheet" type="text/css" media="screen" />
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="payment.css" />
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -35,17 +35,8 @@ Released   : 20080116
 	</div>
 	<div id="menu">
 		<ul>
-			<li class="first"><a href="#" accesskey="1" title="">Home</a></li>
 			<li><a href="#" accesskey="2" title="">Articles</a></li>
 		</ul>
-		<div id="search">
-			<form method="get" action="">
-				<fieldset>
-					<input id="s" type="text" name="s" value="" />
-					<input id="x" type="submit" value="Search" />
-				</fieldset>
-			</form>
-		</div>
 	</div>
 	<!-- start page -->
 	<div id="page">
@@ -53,27 +44,34 @@ Released   : 20080116
 		<div id="content">
 	
 				<section>
+					<div id="success-payment" class="alert alert-success" style="display:none">
+						<strong>Successfull payment! The lesson is booked!</strong>.
+					</div>
 					<h1 style="font-size: xx-large;">Lesson Details</h1>
 					<div class="container">
 						<div class="row">
 							<pay-det-field >Teacher Name: </pay-det-field>
-							<det-pay-result id="pay-teacher-name">   temp dataaaaaaaaaaaaaaaaaaa</det-pay-result>
+							<det-pay-result id="pay-teacher-name" >   temp dataaaaaaaa</det-pay-result>
+						</div>
+						<div class="row">
+							<pay-det-field >Teacher Email: </pay-det-field>
+							<det-pay-result id="pay-teacher-email">   temp dataaaaaaaaaaaaaaaaaaa</det-pay-result>
 						</div>
 						<div class="row">
 							<pay-det-field>Date: </pay-det-field>
-							<det-pay-result id="pay-date">  23/12/19911111111111111111</det-pay-result>
+							<det-pay-result id="pay-date"> </det-pay-result>
 						</div>
 						<div class="row">
 							<pay-det-field>Time: </pay-det-field>
-							<det-pay-result id="pay-time" class="col-4">  23:00</det-pay-result>
+							<det-pay-result id="pay-time" >  23:00</det-pay-result>
 						</div>
 						<div class="row">
 							<pay-det-field>Base Price: </pay-det-field>
-							<det-pay-result id="pay-base-price" class="col-4">  100$</ddet-pay-resultiv>
+							<det-pay-result id="pay-base-price" >  100$</ddet-pay-resultiv>
 						</div>
 						<div class="row">
 							<pay-det-field>Total Price: </pay-det-field>
-							<det-pay-result id="pay-total-price" class="col-4">   105$</det-pay-result>
+							<det-pay-result id="pay-total-price">   105$</det-pay-result>
 						</div>
 					</div>
 				</section>
@@ -95,7 +93,6 @@ Released   : 20080116
 					<h5 style="font-size: 18px;">Expiry date: </h5>
 					<div class="row">
 						<select name='expireMM' id='expireMM'>
-							<option value=''>Month</option>
 							<option value='01'>January</option>
 							<option value='02'>February</option>
 							<option value='03'>March</option>
@@ -110,7 +107,6 @@ Released   : 20080116
 							<option value='12'>December</option>
 						</select>
 						<select name='expireYY' id='expireYY'>
-							<option value=''>Year</option>
 							<option value='20'>2020</option>
 							<option value='21'>2021</option>
 							<option value='22'>2022</option>
