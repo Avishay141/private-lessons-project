@@ -1,4 +1,13 @@
 const db = firebase.database();
+const images_storage = firebase.storage();
+
+var teacher_image_url;
+
+var res = [];
+
+
+
+
 var userID = get_userID_from_url();
 //var database = firebase.database();
 const
@@ -38,7 +47,7 @@ function read(data) {
   $(".profiles").empty();
   var teachers = data.val();
   var teachers_ids = Object.keys(teachers);
-  var res = [];
+
   var res_size = 0;
   for (var i = 0; i < teachers_ids.length; i++) {
     id = teachers_ids[i];
@@ -46,45 +55,63 @@ function read(data) {
       if (search_language(teachers[id].languages_I_teach, selected_Language) &&
         parseInt(teachers[id].lessonPrice) <= parseInt(selected_Price) &&
         teachers[id].homeCountry == selected_Origin) {
-        res.push({ name: teachers[id].name, email: teachers[id].userEmail , teacherId: id});
+        res.push({ name: teachers[id].name, email: teachers[id].userEmail , teacherId: id, imageName:teachers[id].imageName});
         res_size++;
-       
+
       }
     }
   }
   update_html_profiles(res, res_size);
 }
 
+
 function search_language(languages, selected_Language) {
   for (var i = 0; i < languages.length; i++) {
-    if (languages[i] == selected_Language) 
+    if (languages[i] == selected_Language)
       return true;
   }
   return false;
 }
 
 function update_html_profiles(res, res_size) {
-  
+
   console.log(" was printed : " + name + "   " + res_size);
-  
+  //console.log(" imageUrl : " + res[x].imageUrl);
+
     for (var x = 0; x < res_size; x++) {
-      var html_string = "<div class=\"card\" style=\"width:250px\" imgstyle= >"
-        + "<img class=\"card-img-top\" src=\"https://www.w3schools.com/bootstrap4/img_avatar1.png\" alt=\"Card image\" style=\"width:100%\">"
-        + "<div class=\"card-body\">"
-        + "<h4 class=\"card-title\">" + res[x].name + "</h4>"
-        + "<p class=\"card-text\">Email:" + res[x].email + " \n</p>"
-        + "<button type=\"button\" id="+ res[x].teacherId +" onclick=\"profile_btn_func(this.id)\" class=\"btn btn-primary\">See Profile</button>"
-        + "</div>"
-        + "</div>";
+      var imgID = "img"+res[x].teacherId;
+      var html_string = '<div class="card" style="width:250px" imgstyle= >'
+        + '<img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" id="'+imgID+'" style="width:100%">'
+        + '<div class="card-body">'
+        + '<h4 class="card-title">' + res[x].name + '</h4>'
+        + '<p class="card-text">Email:' + res[x].email + ' \n</p>'
+        + '<button type="button" id="' + res[x].teacherId +'" class="btn btn-primary see_profile">See Profile</button>'
+        + '</div>'
+        + '</div>';
       $(".profiles").append(html_string);
       console.log(" " + res[x].teacherId);
     }
+      $(".btn.btn-primary.see_profile").on("click",profile_btn_func);
+
+      for(var i = 0; i < res_size; i++){
+        var storage_ref = images_storage.ref("Users/" + res[i].teacherId +"/" +  res[i].imageName);
+        console.log("Users/" + res[i].teacherId +"/" +  res[i].imageName);
+      
+        var data ={id : "img"+res[i].teacherId };
+        storage_ref.getDownloadURL().then(function(url) {
+          document.getElementById(data.id).src = url;
+      
+        }.bind(data)).catch(function(error) {
+          console.log("error url is: " + error);
+        });
+        
+      }
   }
 
-  function profile_btn_func(tid){
+  function profile_btn_func(){
     var teacher_ID = $(this).attr('id');
-    //console.log(" " + teacher_ID);
-    window.location = "../teacher_info/info.html";//?uid=" + "ZjlEObmuRrR3Kb9ZNjKfKJqr1aI3";
+    console.log("teacher_ID:" + teacher_ID);
+    window.location = "../teacher_info/info.html?uid=" + teacher_ID;
   }
 
 
