@@ -87,7 +87,7 @@ $("#date_right").on("click",function(event){
 });
 
 $("#book_btn").on("click",function(event){
-  db.ref("Users/Teachers/tt").update({'a':"updated"});
+  window.location = "../payment/payment.html?uid="+teacherID+"="+chosenSolt;
   
 });
 
