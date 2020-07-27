@@ -1,5 +1,6 @@
 
 const  db = firebase.database();
+const images_storage = firebase.storage();
 
 //profile attributes
 var name ="";
@@ -11,6 +12,10 @@ var lessonPrice="";
 var availableSlots =[];
 var skype_id ="";
 var userEmail="";
+var imageName="";
+var newImageName="";
+
+
 
 var weekCalenders = initWeekCalendersObjects();
 var weekCalenderIndx = 0;
@@ -19,7 +24,7 @@ var weekCalenderIndx = 0;
 var availableColor = "rgb(0, 153, 51)";
 var notAvailablrColor = "rgb(194, 194, 163)";
 var userID = get_userID_from_url();
-
+var real_upload_btn = document.getElementById("myPhoto");
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -56,9 +61,14 @@ $("select.home_country").on("click", function(e) {
 $("#save_btn").on("click",function(){
   upadate_array_by_checkbox('teach', languages_I_teach);
   upadate_array_by_checkbox('speak', also_speak);
-  console.log("languages_I_teach: " + languages_I_teach);
-  console.log("also_speak: " + also_speak);
+  console.log("imageName: " + imageName);
+  console.log("newImageName: " + newImageName);
   path = "Users/Teachers/"+userID+"/";
+
+if(imageName != newImageName){
+  update_profile_image();
+  imageName = newImageName;
+}
 
 db.ref(path).update({'name':$(".Name").val(),
                     'homeCountry':homeCountry,
@@ -69,7 +79,8 @@ db.ref(path).update({'name':$(".Name").val(),
                     'aboutMe': $(".about_me_txt").val(),
                     'skypeID': $("#skype_id").val(),
                     'userType': "Teacher",
-                    'userEmail':userEmail
+                    'userEmail':userEmail,
+                    'imageName': imageName
                   });
 
 
@@ -140,8 +151,24 @@ $('input[name=checkbox]').change(function(){
     }
 });
 
+//upload images
 
 
+
+$("#upload_image_btn").on("click",function(event){
+    real_upload_btn.click();
+});
+
+$("#myPhoto").on("change",function(event){
+  console.log("I was here qqqqqqqqqqq");
+  if(!real_upload_btn.value){
+    console.log("exiting function");
+    return;
+  }
+
+  newImageName = real_upload_btn.files[0].name;
+
+});
 
 /* ---------------- Service functions -------------- */
 
@@ -296,9 +323,9 @@ function get_profile_info_from_db(data){
   languages_I_teach = current_teacher['languages_I_teach'];
   also_speak = current_teacher['alsoSpeak'];
   availableSlots = current_teacher['availableSlots'];
-  userEmail =current_teacher['userEmail'];
-
-
+  userEmail = current_teacher['userEmail'];
+  imageName =  current_teacher['imageName'];
+  newImageName = current_teacher['imageName'];
    fix_undefined_variavles();
 
   $("#homeCountry").val(homeCountry);
@@ -306,6 +333,7 @@ function get_profile_info_from_db(data){
   document.getElementById("lesson_price").value = lessonPrice;
   document.getElementById("about_me").value = about_me;
   document.getElementById("skype_id").value = skype_id;
+  get_and_update_image_from_db();
 
   console.log("read also_speak: " + also_speak);
   console.log("read languages_I_teach: " + languages_I_teach);
@@ -315,6 +343,18 @@ function get_profile_info_from_db(data){
   update_profile_checkboxes();
 
 
+}
+
+function get_and_update_image_from_db(){
+  var storage_ref = images_storage.ref("Users/" + userID +"/");
+
+  storage_ref.listAll().then(snap => {
+    snap.items.forEach(itemRef => {
+      itemRef.getDownloadURL().then(imgUrl => {
+        document.getElementById("profile_img").src = imgUrl;
+      });
+    })
+  })
 }
 
 function update_profile_checkboxes(){
@@ -371,6 +411,15 @@ function fix_undefined_variavles(){
   if(!lessonPrice)
           lessonPrice ="";
 
+  if(!imageName)
+      imageName ="";
+
+  if(!newImageName)
+    newImageName ="";
+
+
+    
+
 }
 
 function isElemInArray(elem, arr){
@@ -386,4 +435,23 @@ function get_userID_from_url(){
   var res = location.search.substring(1).split("=")[1];
   console.log("userID from url: " + res);
   return res;
+}
+
+function update_profile_image(){
+  var path = "Users/" + userID +"/" + imageName;
+  var storage_ref = images_storage.ref(path);
+  // deleting the old image
+  if(imageName != ""){
+    storage_ref.delete().then(function() {
+      console.log("deleting  the old image")
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  // uplaoding the new image to the storage DB
+  storage_ref = images_storage.ref("Users/" + userID + "/" + newImageName);
+  storage_ref.put(real_upload_btn.files[0]);
+
+
 }
