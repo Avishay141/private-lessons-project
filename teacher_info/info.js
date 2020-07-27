@@ -1,4 +1,5 @@
 const  db = firebase.database();
+const images_storage = firebase.storage();
 
 //profile attributes
 var name ="";
@@ -37,6 +38,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 db.ref("Users/Teachers/"+ teacherID + "/").on("value", get_profile_info_from_db);
 
 build_calender();
+
+
+
+
 
 /* ---------------- Buttons callbacks -------------- */
 
@@ -79,6 +84,11 @@ $("#date_right").on("click",function(event){
 
   build_calender();
 
+});
+
+$("#book_btn").on("click",function(event){
+  db.ref("Users/Teachers/tt").update({'a':"updated"});
+  
 });
 
 
@@ -202,8 +212,7 @@ function get_userID_from_url(){
 function get_profile_info_from_db(data){
   console.log("enter get_profile_info_from_db @@@@@@@");
   console.log("userID: " + userID);
-  // var teachers = data.val();
-  // var current_teacher = teachers[userID];
+
   var current_teacher = data.val();
   console.log("current_teacher: " + current_teacher);
   var keys = Object.keys(current_teacher);
@@ -232,10 +241,22 @@ function get_profile_info_from_db(data){
   document.getElementById("about_me_val").innerHTML = about_me;
   document.getElementById("skype_id_val").innerHTML = skype_id;
   document.getElementById("email_val").innerHTML = userEmail;
-
+  get_and_update_image_from_db();
 
   updateSlotsColors();
 
+}
+
+function get_and_update_image_from_db(){
+  var storage_ref = images_storage.ref("Users/" + teacherID +"/");
+
+  storage_ref.listAll().then(snap => {
+    snap.items.forEach(itemRef => {
+      itemRef.getDownloadURL().then(imgUrl => {
+        document.getElementById("profile_img").src = imgUrl;
+      });
+    })
+  })
 }
 
 function fix_undefined_variavles(){
