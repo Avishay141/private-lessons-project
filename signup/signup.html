@@ -14,8 +14,13 @@
    <!-- form starts here -->
   <h1>Sign Up</h1>
 
-
-  <div id=signup >
+  
+    <div id="signup" >
+      <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="email" class="form-control" id="user_name"  placeholder="Enter your name">
+        
+      </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -48,12 +53,17 @@
          </label>
      </div>
 
-
+  
     <button  type="submit" class="btn btn-primary" id="sbmt">Submit</button>
+
+    <h2 id="error_msg"></h2>
+    <h3 id="success_msg"></h3>
+    
+   
+
   </div>
 
- <h2></h2>
-<h3></h3>
+
 
 
 

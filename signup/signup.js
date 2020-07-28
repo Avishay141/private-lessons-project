@@ -11,6 +11,7 @@ $("#sbmt").on("click",function(){
  //alert("email:"+email+" pass:"+password+ " type:"+userType);
  var verify = $("#Password2").val();
 var skype_id = $("#skype_id").val();
+var name =  $("#user_name").val();
 
  if(verify != password){
 	 alert("wrong password verification");
@@ -35,7 +36,8 @@ var user_created_successfully = false;
 			db.child(path).set({
 				userEmail: email,
 				userType: userType,
-				skypeID: skype_id
+				skypeID: skype_id,
+				name: name
 			}).catch(function(error){
 				console.log("Error ocurred: ", error);
 			});
@@ -43,17 +45,14 @@ var user_created_successfully = false;
 			console.log("end: " + user_created_successfully);
 			if(user_created_successfully){
 				console.log("user created successfuly");
-				$('h3').append("user created successfuly");
+				document.getElementById("success_msg").innerHTML = "user created successfuly"
+				
 				window.location = "../main/main.html?uid="+userID;
 			}
 
 
-			}).catch(e => 	$('h2').append(e.message));
+			}).catch(e => document.getElementById("error_msg").innerHTML = (e.message));	
 
 
 
-
-	 // $("#email").val('');
-	 // $("#Password1").val('');
-	 // $("#Password2").val('');
  });
