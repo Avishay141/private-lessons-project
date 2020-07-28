@@ -4,11 +4,13 @@
 const  db = firebase.database().ref();
 
 $("#login_btn").on("click",function(){
-  var email = $(".Email_input").val();
-  var password = $(".Password_input").val();
+  var email = $("#email").val();
+  var password = $("#password").val();
+  var error_msg = document.getElementById("error_msg_id");
   const auth = firebase.auth();
+  
   var res = auth.signInWithEmailAndPassword(email, password);
-  res.catch(e => console.log(e.message));
+  res.catch(e => error_msg.innerHTML = e.message);
 
 
 });
@@ -26,7 +28,7 @@ $("#sign_up_btn").on("click",function(){
 
 $("#forgot_btn").on("click",function(){
   var auth = firebase.auth();
-  var email = $(".Email_input").val();
+  var email = $("#email").val();
 
   auth.sendPasswordResetEmail(email).then(function() {
     // Email sent.
