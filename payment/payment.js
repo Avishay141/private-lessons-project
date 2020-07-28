@@ -23,15 +23,19 @@ $(document).ready(function(){
     $('#success-payment').hide();
     get_teacher_id_from_url();
     db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
-
+    db.ref("Users/Teachers/"+ userID + "/").on("value", get_student_info_from_db);
 });
 
+function get_student_info_from_db(data){
+  var student_info = data.val();
+  bookedClassesS = student_info.bookedClasses;
+}
 function get_lesson_info_from_db(data) {
     var teacher_info  = data.val();
     teacher_price=teacher_info.lessonPrice;
     teacher_name = teacher_info.name;
     teacher_email = teacher_info.userEmail;
-    bookedClasses = teacher_info.bookedClasses;
+    bookedClassesT = teacher_info.bookedClasses;
     availableSlots = teacher_info.availableSlots;
 
     get_class_time_from_url();
@@ -47,7 +51,35 @@ firebase.auth().onAuthStateChanged(function(user) {
       console.log("this line shoud be executed once for each login");
     }
   });
-
+  function update_db(){
+    console.log("enter update_db");
+            if (!bookedClassesT){
+                console.log("bookedClassesT if null");
+                bookedClassesT=[];
+            }
+            console.log("teacher booked before push:  " + bookedClassesT)
+            bookedClassesT.push(fullDate);    
+            console.log("teacher booked after push:  " + bookedClassesT)
+                //update student
+            if (!bookedClassesS){
+                bookedClassesS=[];
+            }
+            bookedClassesS.push(fullDate);
+            removeSlot(fullDate);
+            console.log("teacher booked   " + bookedClassesT)
+            db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': bookedClassesT});
+            db.ref("Users/Teachers/"+ userID + "/").update({'bookedClasses': bookedClassesS});   
+}
+// removes the slot from the availableSlots array
+function removeSlot(slot){
+    const index = availableSlots.indexOf(slot);
+    console.log("index slot   " + index);
+    if (index > -1) {
+      availableSlots.splice(index, 1);
+      db.ref("Users/Teachers/"+ teacher_id + "/").update({'availableSlots': availableSlots});
+      console.log("available slots   " + availableSlots.toString());
+    } 
+}
   $("#orderButton").click(function(){
     console.log("form submit attempt");
     let formName = $('#pay-credit-name-input').val().trim();
@@ -66,13 +98,14 @@ firebase.auth().onAuthStateChanged(function(user) {
         console.log("failed form");
         return false;
     }
-    $('#success-payment').show(); 
     update_db();
-    
-    
+    $('#exampleModalCenter').modal('show');
   });
 
-
+  $("#payment-success-ok-btn").on("click",function(event){
+    window.location = "../main/main.html";
+    
+  });
   function get_teacher_id_from_url(){
     teacher_id = location.search.substring(0).split("=")[1];
     console.log("teacher_id from url: " + teacher_id);
@@ -90,6 +123,8 @@ firebase.auth().onAuthStateChanged(function(user) {
   
   function get_class_time_from_url(){
     fullDate = location.search.substring(0).split("=")[2];
+    if (!fullDate)
+      return;
     console.log("class_day from url: " + fullDate);
     class_day =  fullDate.substring(0).split("_")[0];
     console.log("class_day from url: " + class_day);
@@ -178,28 +213,3 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 
 
-function update_db(){
-    console.log("enter update_db");
-            if (!bookedClassesT){
-                bookedClassesT=[];
-            }
-            bookedClassesT.push(fullDate);    
-                //update student
-            if (!bookedClassesS){
-                bookedClassesS=[];
-            }
-            bookedClassesS.push(fullDate);
-            removeSlot(fullDate);
-            db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': fullDate});
-            db.ref("Users/Teachers/"+ teacher_id + "/").update({'availableSlots': availableSlots});
-            db.ref("Users/Teachers/"+ userID + "/").update({'bookedClasses': fullDate});   
-}
-// removes the slot from the availableSlots array
-function removeSlot(slot){
-    const index = availableSlots.indexOf(slot);
-    console.log("index slot   " + index);
-    if (index > -1) {
-      availableSlots.splice(index, 1);
-      console.log("available slots   " + availableSlots.toString());
-    } 
-}
