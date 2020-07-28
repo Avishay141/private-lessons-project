@@ -45,7 +45,7 @@ var user_created_successfully = false;
 			console.log("end: " + user_created_successfully);
 			if(user_created_successfully){
 				console.log("user created successfuly");
-				document.getElementById("success_msg").innerHTML = "user created successfuly"
+				document.getElementById("success_msg").innerHTML = "user created successfuly";
 				
 				window.location = "../main/main.html?uid="+userID;
 			}
