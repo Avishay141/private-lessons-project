@@ -14,7 +14,7 @@ var skype_id ="";
 var userEmail="";
 var imageName="";
 var newImageName="";
-
+var bookedClasses;
 
 
 var weekCalenders = initWeekCalendersObjects();
@@ -326,22 +326,33 @@ function get_profile_info_from_db(data){
   userEmail = current_teacher['userEmail'];
   imageName =  current_teacher['imageName'];
   newImageName = current_teacher['imageName'];
-   fix_undefined_variavles();
+  bookedClasses = current_teacher['bookedClasses'];
+  fix_undefined_variavles();
 
   $("#homeCountry").val(homeCountry);
   document.getElementById("Name").value = name;
   document.getElementById("lesson_price").value = lessonPrice;
   document.getElementById("about_me").value = about_me;
   document.getElementById("skype_id").value = skype_id;
+
+  update_booked_classes_list();
+
   get_and_update_image_from_db();
-
-  console.log("read also_speak: " + also_speak);
-  console.log("read languages_I_teach: " + languages_I_teach);
-  console.log("read availableSlots: " + availableSlots);
-
   updateSlotsColors();
   update_profile_checkboxes();
 
+
+}
+function update_booked_classes_list(){
+  console.log("update_booked_classes_list");
+  if(!bookedClasses)
+    return;
+  
+  for( var i =0; i < bookedClasses.length; i++){
+    console.log("update_booked_classes_list i= " + i);
+    var new_li_str = '<li class="list-group-item" style="background-color: rgb(153, 187, 255)">' +bookedClasses[i]+ '</li>';
+    $(".list-group").append(new_li_str);
+  }
 
 }
 

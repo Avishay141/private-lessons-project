@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <h1>teacher page</h1>
+  <h1 class="page_title">teacher page</h1>
 
   <button type="button" class="btn btn-primary" id="logout_btn">Logout</button>
 
@@ -34,6 +34,7 @@
 
 
         <h5 class="profile_title">Profile</h5>
+        <label>Name:</label>
         <textarea class="Name" rows="1" placeholder="Name" style="width: 100%" id="Name"></textarea>
         <div class="dropdown" id="Home_country">
           <form>
@@ -684,6 +685,14 @@
       <div class="col-sm-6 about_me">
         <h5 class="about_me_title">About me</h5>
         <textarea class="about_me_txt" rows="8" placeholder="Tell us about yourself..." style="width: 100%" id="about_me"></textarea>
+      </div>
+    </div>
+
+    <div class="row about_me">
+      <div class="col-sm-6 about_me">
+        <h5 class="booked_lessons">Booked lessons</h5>
+        <ul class="list-group">
+        </ul>
       </div>
     </div>
 
