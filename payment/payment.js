@@ -96,7 +96,7 @@ function get_lesson_info_from_db(data) {
     }
 
     //console.log("teacher booked before push:  " + bookedClassesT)
-    bookedClassesT.push('Time: + ' + fullDate + ', Student email: ' +student_email + ', Student skypeID: ' + student_skypeID);    
+    bookedClassesT.push('Time: ' + fullDate + ', Student email: ' + student_email + ', Student skypeID: ' + student_skypeID);    
     //console.log("teacher booked after push:  " + bookedClassesT)
     db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': bookedClassesT});
     
@@ -113,7 +113,7 @@ function get_lesson_info_from_db(data) {
 
     console.log("student id: " + userID);
     console.log("student booked before push:  " + bookedClassesS)
-    bookedClassesS.push('Time: + ' + fullDate + ', Teacher email: ' + teacher_email + ', Teacher skypeID: ' + teacher_skypeID);
+    bookedClassesS.push('Time: ' + fullDate + ', Teacher email: ' + teacher_email + ', Teacher skypeID: ' + teacher_skypeID);
     console.log("student booked after push:  " + bookedClassesS)
     db.ref("Users/Students/"+ userID + "/").update({'bookedClasses': bookedClassesS});
     removeSlot(fullDate);
