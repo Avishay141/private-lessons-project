@@ -40,6 +40,8 @@ function get_company_info_from_db(data){
 async function get_student_info_from_db(data){
   var student_info = data.val();
   console.log("entered get student data. student_info " + student_info + "student id: "+ userID);
+  console.log('student db access string:  Users/Students/'+ userID + '/');
+  console.log('teacher db access string:  Users/Teachers/'+ teacher_id + '/');
   bookedClassesS = student_info.bookedClasses;
   console.log("entered get student data. booked classes: " + bookedClassesS);
   console.log("entered get student data. booked classes: " + student_info.bookedClasses);
@@ -88,6 +90,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     //update student class info
     if (!bookedClassesS){
+        console.log("bookedClassesS if null");
         bookedClassesS=[];
     }
 
