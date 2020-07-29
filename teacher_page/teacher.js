@@ -15,6 +15,7 @@ var userEmail="";
 var imageName="";
 var newImageName="";
 var bookedClasses;
+var bookedDates = [];
 
 
 var weekCalenders = initWeekCalendersObjects();
@@ -23,6 +24,7 @@ var weekCalenderIndx = 0;
 
 var availableColor = "rgb(0, 153, 51)";
 var notAvailablrColor = "rgb(194, 194, 163)";
+var bookedColor = "rgb(255, 204, 102)";
 var userID = get_userID_from_url();
 var real_upload_btn = document.getElementById("myPhoto");
 
@@ -100,6 +102,9 @@ function calender_btn_clicked(event){
 
 
 
+  if ($( this ).css( "background-color" ) == bookedColor)
+    return;
+    
   var newColor = availableColor;
 
   if ($( this ).css( "background-color" ) == availableColor)
@@ -300,7 +305,14 @@ function updateSlotsColors(){
     var slot = document.getElementById(availableSlots[i])
     if(slot)
       slot.style.background=availableColor;
+  }
 
+  for(var i = 0; i < bookedDates.length; i++){
+    var slot = document.getElementById(bookedDates[i])
+    if(slot){
+      slot.innerText ="Booked";
+      slot.style.background=bookedColor;
+    }
   }
 }
 
@@ -338,11 +350,14 @@ function get_profile_info_from_db(data){
   update_booked_classes_list();
 
   get_and_update_image_from_db();
+  fill_booked_dates();
   updateSlotsColors();
   update_profile_checkboxes();
 
 
+
 }
+
 function update_booked_classes_list(){
   console.log("update_booked_classes_list");
   if(!bookedClasses)
@@ -465,4 +480,17 @@ function update_profile_image(){
   storage_ref.put(real_upload_btn.files[0]);
 
 
+}
+
+function fill_booked_dates(){
+  for(var i =0; i < bookedClasses.length; i++){
+    var temp = extract_date(bookedClasses[i]);
+    bookedDates.push(temp);
+  }
+}
+
+function extract_date(str){
+  var res = str.substring(0).split(",")[0];
+  res = res.substring(0).split(" ")[1];
+  return res;
 }
