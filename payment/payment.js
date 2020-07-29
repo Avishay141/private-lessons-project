@@ -6,13 +6,16 @@ var teacher_id='';
 var teacher_name='';
 var class_day='';
 var class_hour='';
-var teacher_price=0;
-var teacher_email='';
+var teacher_price = 0;
+var teacher_email = '';
+var teacher_skypeID = '';
 
 var bookedClassesT=[];
 var bookedClassesS=[];
 var availableSlots=[];
 var fullDate='';
+var student_email = '';
+var student_skypeID = '';
 var num_of_lessons_comp=0;
 var revenue_comp=0;
 
@@ -57,6 +60,10 @@ async function get_student_info_from_db(data){
   console.log('student db access string:  Users/Students/'+ userID + '/');
   console.log('teacher db access string:  Users/Teachers/'+ teacher_id + '/');
   bookedClassesS = student_info.bookedClasses;
+  student_email = student_info.userEmail;
+  student_skypeID = student_info.skypeID;
+  if (student_skypeID == undefined || student_skypeID == null)
+      student_skypeID='';
   console.log("entered get student data. booked classes: " + bookedClassesS);
   console.log("entered get student data. booked classes: " + student_info.bookedClasses);
 }
@@ -69,6 +76,9 @@ function get_lesson_info_from_db(data) {
 
     teacher_name = teacher_info.name;
     teacher_email = teacher_info.userEmail;
+    teacher_skypeID = teacher_info.skypeID;
+    if (teacher_skypeID == undefined || teacher_skypeID == null)
+        teacher_skypeID='';
     bookedClassesT = teacher_info.bookedClasses;
     availableSlots = teacher_info.availableSlots;
 
@@ -84,8 +94,9 @@ function get_lesson_info_from_db(data) {
         //console.log("bookedClassesT if null");
         bookedClassesT=[];
     }
+
     //console.log("teacher booked before push:  " + bookedClassesT)
-    bookedClassesT.push(fullDate);    
+    bookedClassesT.push('Time: + ' + fullDate + ', Student email: ' +student_email + ', Student skypeID: ' + student_skypeID);    
     //console.log("teacher booked after push:  " + bookedClassesT)
     db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': bookedClassesT});
     
@@ -102,7 +113,7 @@ function get_lesson_info_from_db(data) {
 
     console.log("student id: " + userID);
     console.log("student booked before push:  " + bookedClassesS)
-    bookedClassesS.push(fullDate);
+    bookedClassesS.push('Time: + ' + fullDate + ', Teacher email: ' + teacher_email + ', Teacher skypeID: ' + teacher_skypeID);
     console.log("student booked after push:  " + bookedClassesS)
     db.ref("Users/Students/"+ userID + "/").update({'bookedClasses': bookedClassesS});
     removeSlot(fullDate);
@@ -148,7 +159,6 @@ function get_lesson_info_from_db(data) {
     userID = location.search.substring(0).split("=")[3];
     console.log("teacher_id from url: " + teacher_id);
     console.log("user_id from url: " + userID);
-
   }
 
   function fill_class_data(){
