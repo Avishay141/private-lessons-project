@@ -23,11 +23,25 @@ $(document).ready(async function(){
     $('#pay-credit-number-err').hide();
     $('#pay-credit-cvc-err').hide();
     $('#success-payment').hide();
-    get_teacher_id_from_url();
-    await db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
-    await db.ref('Users/Students/'+ userID + '/').on('value', get_student_info_from_db);
-    await db.ref("companyInfo/").on("value", get_company_info_from_db);
 });
+
+
+firebase.auth().onAuthStateChanged( function(user) {
+  if (!user) {
+     window.location = "../login/index.html";
+  } else {
+    userID = user.uid;
+    console.log("this line shoud be executed once for each login");
+  }
+});
+
+get_all_id_from_url();
+db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
+db.ref("companyInfo/").on("value", get_company_info_from_db);
+console.log('user id before calllllll:  Users/Students/'+ userID + '/');
+db.ref('Users/Students/'+ userID + '/').on('value', get_student_info_from_db);
+
+
 
 
 function get_company_info_from_db(data){
@@ -62,14 +76,6 @@ function get_lesson_info_from_db(data) {
     fill_class_data();
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
-    if (!user) {
-       window.location = "../login/index.html";
-    } else {
-      userID = user.uid;
-      console.log("this line shoud be executed once for each login");
-    }
-  });
   function update_db(){
     console.log("enter update_db");
     
@@ -137,9 +143,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     window.location = "../main/main.html";
     
   });
-  function get_teacher_id_from_url(){
+  function get_all_id_from_url(){
     teacher_id = location.search.substring(0).split("=")[1];
+    userID = location.search.substring(0).split("=")[3];
     console.log("teacher_id from url: " + teacher_id);
+    console.log("user_id from url: " + userID);
+
   }
 
   function fill_class_data(){
