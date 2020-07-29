@@ -6,33 +6,51 @@ var teacher_id='';
 var teacher_name='';
 var class_day='';
 var class_hour='';
-var teacher_price='';
+var teacher_price=0;
 var teacher_email='';
 
 var bookedClassesT=[];
 var bookedClassesS=[];
 var availableSlots=[];
 var fullDate='';
+var num_of_lessons_comp=0;
+var revenue_comp=0;
 
 
-$(document).ready(function(){
+$(document).ready(async function(){
     $('#pay-credit-name-err').hide();
     $('#pay-credit-email-err').hide();
     $('#pay-credit-number-err').hide();
     $('#pay-credit-cvc-err').hide();
     $('#success-payment').hide();
     get_teacher_id_from_url();
-    db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
-    db.ref("Users/Teachers/"+ userID + "/").on("value", get_student_info_from_db);
+    await db.ref("Users/Teachers/"+ teacher_id + "/").on("value", get_lesson_info_from_db);
+    await db.ref('Users/Students/'+ userID + '/').on('value', get_student_info_from_db);
+    await db.ref("companyInfo/").on("value", get_company_info_from_db);
 });
 
-function get_student_info_from_db(data){
-  var student_info = data.val();
-  bookedClassesS = student_info.bookedClasses;
+
+function get_company_info_from_db(data){
+  var company_info = data.val();
+  num_of_lessons_comp = company_info.numOfLessons;
+  revenue_comp = parseFloat(company_info.revenue);
+  console.log("revenue value is: " + revenue_comp);
 }
+
+async function get_student_info_from_db(data){
+  var student_info = data.val();
+  console.log("entered get student data. student_info " + student_info + "student id: "+ userID);
+  bookedClassesS = student_info.bookedClasses;
+  console.log("entered get student data. booked classes: " + bookedClassesS);
+  console.log("entered get student data. booked classes: " + student_info.bookedClasses);
+}
+
 function get_lesson_info_from_db(data) {
     var teacher_info  = data.val();
-    teacher_price=teacher_info.lessonPrice;
+    console.log("entered get teacher data. teacher_info " + teacher_info + "student id: "+ teacher_id);
+    teacher_price=parseFloat(teacher_info.lessonPrice);
+    console.log("teacher price from db is: " + teacher_price);
+
     teacher_name = teacher_info.name;
     teacher_email = teacher_info.userEmail;
     bookedClassesT = teacher_info.bookedClasses;
@@ -44,7 +62,6 @@ function get_lesson_info_from_db(data) {
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (!user) {
-  
        window.location = "../login/index.html";
     } else {
       userID = user.uid;
@@ -53,31 +70,42 @@ firebase.auth().onAuthStateChanged(function(user) {
   });
   function update_db(){
     console.log("enter update_db");
-            if (!bookedClassesT){
-                console.log("bookedClassesT if null");
-                bookedClassesT=[];
-            }
-            console.log("teacher booked before push:  " + bookedClassesT)
-            bookedClassesT.push(fullDate);    
-            console.log("teacher booked after push:  " + bookedClassesT)
-                //update student
-            if (!bookedClassesS){
-                bookedClassesS=[];
-            }
-            bookedClassesS.push(fullDate);
-            removeSlot(fullDate);
-            console.log("teacher booked   " + bookedClassesT)
-            db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': bookedClassesT});
-            db.ref("Users/Teachers/"+ userID + "/").update({'bookedClasses': bookedClassesS});   
+    
+    //update teacher class info
+    if (!bookedClassesT){
+        //console.log("bookedClassesT if null");
+        bookedClassesT=[];
+    }
+    //console.log("teacher booked before push:  " + bookedClassesT)
+    bookedClassesT.push(fullDate);    
+    //console.log("teacher booked after push:  " + bookedClassesT)
+    db.ref("Users/Teachers/"+ teacher_id + "/").update({'bookedClasses': bookedClassesT});
+    
+    //update company info
+    //console.log("update db: revenue: "+ (revenue_comp + teacher_price) );//
+    db.ref("companyInfo/").update({'numOfLessons':(num_of_lessons_comp+1)});
+    db.ref("companyInfo/").update({'revenue':(revenue_comp + teacher_price)});
+
+    //update student class info
+    if (!bookedClassesS){
+        bookedClassesS=[];
+    }
+
+    console.log("student id: " + userID);
+    console.log("student booked before push:  " + bookedClassesS)
+    bookedClassesS.push(fullDate);
+    console.log("student booked after push:  " + bookedClassesS)
+    db.ref("Users/Students/"+ userID + "/").update({'bookedClasses': bookedClassesS});
+    removeSlot(fullDate);
 }
 // removes the slot from the availableSlots array
-function removeSlot(slot){
+ function removeSlot(slot){
     const index = availableSlots.indexOf(slot);
     console.log("index slot   " + index);
     if (index > -1) {
       availableSlots.splice(index, 1);
       db.ref("Users/Teachers/"+ teacher_id + "/").update({'availableSlots': availableSlots});
-      console.log("available slots   " + availableSlots.toString());
+      console.log("available slots   " + availableSlots);
     } 
 }
   $("#orderButton").click(function(){
