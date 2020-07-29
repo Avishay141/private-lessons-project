@@ -408,16 +408,16 @@ table, th, td {
 	}
 	
 	::-webkit-scrollbar-track {
-	border: 1px solid #E91E63;
+	border: 1px solid #B9B6B6;
 	border-radius: 15px;
 	}
 	
 	::-webkit-scrollbar-thumb {
-	background: #E91E63;  
+	background: #B9B6B6;  
 	border-radius: 15px;
 	}
 	
 	::-webkit-scrollbar-thumb:hover {
-	background: #E91E63;  
+	background: #B9B6B6;  
 	}
 
