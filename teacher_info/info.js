@@ -87,6 +87,8 @@ $("#date_right").on("click",function(event){
 });
 
 $("#book_btn").on("click",function(event){
+  if(chosenSolt == "")
+    return;
   window.location = "../payment/payment.html?uid="+teacherID+"="+chosenSolt+"="+userID;
   
 });

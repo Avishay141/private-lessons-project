@@ -56,7 +56,15 @@ text-align: center;
 		background-color: #ECD6D9;
 	}
 
-/* body{
-		 background-image: url("https://i0.wp.com/www.importanceoflanguages.com/wp-content/uploads/language-personal-communication.jpg?w=1200&ssl=1");
-} */
+#book_btn{
+	text-align: center;
+	display: block;
+	background-color: brown;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	width: 150px;
+	height:80px;
+
+}
 
