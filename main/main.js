@@ -29,7 +29,13 @@ range.addEventListener('input', setValue);
 
 /////////////---------- Read Teachers for search
 $("#edit_teacher_profile").on("click", function () {
-  window.location = "../teacher_page/teacher.html?uid=" + userID;
+  var students = firebase.database().ref( "Users/Students/"+userID);
+  students.once("value").then(function(snapshot) {
+    if(snapshot.exists())
+      window.location = "../user/user.html?uid=" + userID;  //if it's True then the user is a student and move to student profile
+    else
+      window.location = "../teacher_page/teacher.html?uid=" + userID; //move to teachers profile
+    }); 
 });
 
 
@@ -39,12 +45,12 @@ $("#searchBtn").on("click", function (event) {
 
 
 function read(data) {
-
+  res=[];
   var selected_Language = $("#ddl_language").children("option:selected").val();
   var selected_Origin = $("#ddl_origin").children("option:selected").val();
   var selected_Price = document.getElementById("rangeSlider").value;
 
-  $(".profiles").empty();
+ 
   var teachers = data.val();
   var teachers_ids = Object.keys(teachers);
 
@@ -74,7 +80,8 @@ function search_language(languages, selected_Language) {
 }
 
 function update_html_profiles(res, res_size) {
-
+  $(".profiles").empty();
+  
   console.log(" was printed : " + name + "   " + res_size);
   //console.log(" imageUrl : " + res[x].imageUrl);
 
@@ -94,6 +101,8 @@ function update_html_profiles(res, res_size) {
       $(".btn.btn-primary.see_profile").on("click",profile_btn_func);
 
       for(var i = 0; i < res_size; i++){
+        if(!res[i].imageName)
+          continue;
         var storage_ref = images_storage.ref("Users/" + res[i].teacherId +"/" +  res[i].imageName);
         console.log("Users/" + res[i].teacherId +"/" +  res[i].imageName);
       
@@ -106,17 +115,14 @@ function update_html_profiles(res, res_size) {
         });
         
       }
-  }
+}
 
-  function profile_btn_func(){
-    var teacher_ID = $(this).attr('id');
-    console.log("teacher_ID:" + teacher_ID);
-    window.location = "../teacher_info/info.html?uid=" + teacher_ID;
-  }
+function profile_btn_func(){
+  var teacher_ID = $(this).attr('id');
+  console.log("teacher_ID:" + teacher_ID);
+  window.location = "../teacher_info/info.html?uid=" + teacher_ID;
+}
 
-
-
-/*
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
@@ -126,7 +132,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     userID = user.uid;
     console.log("this line shoud be executed once for each login");
   }
-});*/
+});
 
 
 function get_userID_from_url() {
@@ -137,4 +143,9 @@ function get_userID_from_url() {
 
 $("#logout_btn").on("click", function () {
   firebase.auth().signOut();
+});
+
+
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
 });
