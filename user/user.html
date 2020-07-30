@@ -8,35 +8,51 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="user.css">
-    <title>Bajil User Info</title>
+    <title>User Profile </title>
   </head>
   <body>
    <!-- form starts here -->
-  <h1>My Profile</h1>
-
-
-  <div id=userProfile >
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <h1 class="page_title" >My Profile</h1>
+  <div class="container">
+      <div class="row info">
+        <div class="col-sm-12 info">
+          <label >Name:</label> <p id=nameInfo></p>
+          <label for="exampleInputEmail1">Email address:</label> <p id=email></p>
+          <label for="exampleInputEmail1">Skype ID:</label> <p id=skype></p>
+          <label for="exampleInputEmail1">Booked lessons:</label> <p id=skype></p>
+          <ul class="list-group">
+          </ul>
+      </div>
     </div>
-   
-    
-    <div class="form-group">
-       <label for="exampleInputPassword1">Skype ID</label>
-       <input  class="form-control" id="skype_id" placeholder="Put your skype ID">
-  </div>
-     
+
+      <div class="row update">
+          <div class="col-sm-12 info">
+            <div class="form-group">
+              <h3 class="update_details">update details</h3>
+              <label for="exampleInputPassword1">Name</label>
+              <input  class="form-control" id="nameInput" placeholder="Enter name here">
+             </div>
        
-
-    <button  type="submit" class="btn btn-primary" id="updt"  >Update</button>
+       
+           
+           <div class="form-group">
+              <label for="exampleInputPassword1">Skype ID</label>
+              <input  class="form-control" id="skype_id" placeholder="Put your skype ID">
+           </div>
+            
+              
+       
+           <button  type="submit" class="btn btn-primary" id="updt"  >Update</button>
+        </div>
+      
+    </div>
   </div>
+   
 
-  <button type="button" class="btn btn-dark" id="main">Back to Main </button>
 
- <h2></h2>
-<h3></h3>
+  
+
+
 
 
 
