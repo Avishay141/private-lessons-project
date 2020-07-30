@@ -50,14 +50,30 @@ build_calender();
 
 /* ---------------- Buttons callbacks -------------- */
 
-$("#logout_btn").on("click",function(){
-  firebase.auth().signOut();
-});
+
 
 $("select.home_country").on("click", function(e) {
   homeCountry = $(this).children("option:selected").val();
 
 
+});
+
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
+
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
+
+$("#edit_teacher_profile").on("click", function () {
+  var students = firebase.database().ref( "Users/Students/"+userID);
+  students.once("value").then(function(snapshot) {
+    if(snapshot.exists())
+      window.location = "../user/user.html?uid=" + userID;  //if it's True then the user is a student and move to student profile
+    else
+      window.location = "../teacher_page/teacher.html?uid=" + userID; //move to teachers profile
+    }); 
 });
 
 $("#save_btn").on("click",function(){
@@ -137,15 +153,7 @@ $("#date_right").on("click",function(event){
 
 });
 
-// btn for testing only
-$("#test").on("click",function(event){
 
-  var items=document.getElementsByName("teach");
-  for(var i=0; i<items.length; i++){
-    if(items[i].type=='checkbox' && items[i].value=="Akan")
-      items[i].checked = true;
-  }
-});
 
 
 $('input[name=checkbox]').change(function(){
@@ -494,3 +502,5 @@ function extract_date(str){
   res = res.substring(0).split(" ")[1];
   return res;
 }
+
+

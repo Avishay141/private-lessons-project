@@ -285,3 +285,22 @@ function fix_undefined_variavles(){
           lessonPrice ="";
 
 }
+
+
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
+
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
+
+$("#edit_teacher_profile").on("click", function () {
+  var students = firebase.database().ref( "Users/Students/"+userID);
+  students.once("value").then(function(snapshot) {
+    if(snapshot.exists())
+      window.location = "../user/user.html?uid=" + userID;  //if it's True then the user is a student and move to student profile
+    else
+      window.location = "../teacher_page/teacher.html?uid=" + userID; //move to teachers profile
+    }); 
+});
