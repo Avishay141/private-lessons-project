@@ -62,6 +62,8 @@ function calender_btn_clicked(event){
   }
   else{
       $(event.delegateTarget ).css( "background-color", bookedColor);
+      if(chosenSolt != "")
+        document.getElementById(chosenSolt).style.backgroundColor = availableColor;
       chosenSolt  = $(this).attr('id');
       bookedIndex = weekCalenderIndx;
   }
