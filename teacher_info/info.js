@@ -28,7 +28,7 @@ var userID;
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
 
-     window.location = "../login/index.html";
+     window.location = "../index.html";
   } else {
     userID = user.uid;
     console.log("this line shoud be executed once for each login");
