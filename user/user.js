@@ -61,7 +61,13 @@ $("#updt").click(function(){
 
 
 	
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
 
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
 
 
 
