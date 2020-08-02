@@ -42,7 +42,7 @@ $("#forgot_btn").on("click",function(){
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("!!!!!!!!!: " + user.uid)
-    window.location = "../main/main.html?uid="+user.uid;
+    window.location = "main/main.html?uid="+user.uid;
   } else {
     console.log("User hasn't logged in yet");
   }
