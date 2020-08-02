@@ -5,7 +5,7 @@ var teacher_image_url;
 
 var res = [];
 
-
+firebase.auth().signOut();
 
 
 var userID = get_userID_from_url();
