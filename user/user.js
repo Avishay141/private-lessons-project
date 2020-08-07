@@ -4,7 +4,9 @@ const  db = firebase.database();
 var userID = get_userID_from_url();
 var email ="";
 var skypeID ="";
+var name = "";
 const userType = "Student";
+var bookedClasses=[];
 //alert(userId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
@@ -33,21 +35,25 @@ $("#updt").click(function(){
   //block of code that runs when the click event triggers
 
   	console.log("enter update function");
-	 email = $("#email").val();
+	 email = email;
 	 skypeID = $("#skype_id").val();
+	 name = $("#nameInput").val();;
 	
-	 	console.log("email input: "+email);
-	 	console.log("skype input: "+skypeID);
+	 	
 
   		db.ref(student_path).set({
+				name: name,
 				userEmail: email,
 				userType: userType,
-				skypeID: skypeID
+        skypeID: skypeID,
+        bookedClasses: bookedClasses
 			}).catch(function(error){
 				alert("Error ocurred: ", error);
 			});
 
-			alert('Profile Update Success');
+			//alert('Profile Update Success');
+
+			location.reload();
 
 
 });
@@ -55,7 +61,13 @@ $("#updt").click(function(){
 
 
 	
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
 
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
 
 
 
@@ -74,16 +86,20 @@ function getInfo(data) {
   
   skypeID = current_user['skypeID'];
   
+  name = current_user['name'];
 
+  bookedClasses = current_user['bookedClasses'];
 
    
+	$('#email').append(email);
+	$('#nameInfo').append(name);
+	$('#skype').append(skypeID);
+	//document.getElementById("email").value = email;
+	document.getElementById("skype_id").value = skypeID;
+	document.getElementById("nameInput").value = name;
 
-
-  document.getElementById("email").value = email;
-  document.getElementById("skype_id").value = skypeID;
- 
-
-
+  update_booked_classes_list();
+	console.log("finished getInfo");
 
 
 }
@@ -99,3 +115,17 @@ function get_userID_from_url(){
 $("#main").on("click", function () {
   window.location = "../main/main.html?uid=" + userID;
 });
+
+
+function update_booked_classes_list(){
+  console.log("update_booked_classes_list");
+  if(!bookedClasses)
+    return;
+  
+  for( var i =0; i < bookedClasses.length; i++){
+    console.log("update_booked_classes_list i= " + i);
+    var new_li_str = '<li class="list-group-item" style="background-color: rgb(153, 187, 255)">' +bookedClasses[i]+ '</li>';
+    $(".list-group").append(new_li_str);
+  }
+
+}

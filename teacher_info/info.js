@@ -28,7 +28,7 @@ var userID;
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
 
-     window.location = "../login/index.html";
+     window.location = "../index.html";
   } else {
     userID = user.uid;
     console.log("this line shoud be executed once for each login");
@@ -62,6 +62,8 @@ function calender_btn_clicked(event){
   }
   else{
       $(event.delegateTarget ).css( "background-color", bookedColor);
+      if(chosenSolt != "")
+        document.getElementById(chosenSolt).style.backgroundColor = availableColor;
       chosenSolt  = $(this).attr('id');
       bookedIndex = weekCalenderIndx;
   }
@@ -87,6 +89,8 @@ $("#date_right").on("click",function(event){
 });
 
 $("#book_btn").on("click",function(event){
+  if(chosenSolt == "")
+    return;
   window.location = "../payment/payment.html?uid="+teacherID+"="+chosenSolt+"="+userID;
   
 });
@@ -283,3 +287,22 @@ function fix_undefined_variavles(){
           lessonPrice ="";
 
 }
+
+
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
+
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
+
+$("#edit_teacher_profile").on("click", function () {
+  var students = firebase.database().ref( "Users/Students/"+userID);
+  students.once("value").then(function(snapshot) {
+    if(snapshot.exists())
+      window.location = "../user/user.html?uid=" + userID;  //if it's True then the user is a student and move to student profile
+    else
+      window.location = "../teacher_page/teacher.html?uid=" + userID; //move to teachers profile
+    }); 
+});

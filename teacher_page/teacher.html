@@ -14,9 +14,28 @@
 </head>
 
 <body>
-  <h1>teacher page</h1>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <button type="button" class="btn btn-dark" id="logout_btn">Logout</button>
+    <button type="button" class="btn btn-dark" id="edit_teacher_profile">Profile</button>
+    <a class="navbar-brand" href="#"></a>
+    <img
+      src="https://p1.hiclipart.com/preview/213/1021/220/google-logo-background-teacher-school-education-student-world-teachers-day-learning-teacher-education-png-clipart.jpg"
+      width="50" height="50" alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <button type="button" class="btn btn-primary" id="logout_btn">Logout</button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" type="button" id="move_to_main">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <h1 class="page_title">teacher page</h1>
 
   <div class="container">
     <div class="row profile">
@@ -25,7 +44,7 @@
       <div class="col-sm-2 profile">
         <form action="/action_page.php">
           <input type="file" id="myPhoto" name="filename" hidden="hidden">
-          <img src="" alt="nothing chosen!!!"  id="profile_img" width="140" height="140">
+          <img src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="nothing chosen!!!"  id="profile_img" width="140" height="140">
           <button type="button" class="btn btn-primary" id="upload_image_btn">upload image</button>
       </form>
       </div>
@@ -34,6 +53,7 @@
 
 
         <h5 class="profile_title">Profile</h5>
+        <label>Name:</label>
         <textarea class="Name" rows="1" placeholder="Name" style="width: 100%" id="Name"></textarea>
         <div class="dropdown" id="Home_country">
           <form>
@@ -687,6 +707,14 @@
       </div>
     </div>
 
+    <div class="row about_me">
+      <div class="col-sm-6 about_me">
+        <h5 class="booked_lessons">Booked lessons</h5>
+        <ul class="list-group">
+        </ul>
+      </div>
+    </div>
+
     <div class="row calender">
       <div class="col-sm-10 calender">
         <h5 class="calender_title">Calender</h5>
@@ -715,7 +743,7 @@
 
 
 
-    <button type="button" class="btn btn-primary" id="test" >test</button>
+    
 
 
     <!-- Modal -->
@@ -747,7 +775,6 @@
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-storage.js"></script>
 
 

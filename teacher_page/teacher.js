@@ -14,7 +14,8 @@ var skype_id ="";
 var userEmail="";
 var imageName="";
 var newImageName="";
-
+var bookedClasses;
+var bookedDates = [];
 
 
 var weekCalenders = initWeekCalendersObjects();
@@ -23,6 +24,7 @@ var weekCalenderIndx = 0;
 
 var availableColor = "rgb(0, 153, 51)";
 var notAvailablrColor = "rgb(194, 194, 163)";
+var bookedColor = "rgb(255, 204, 102)";
 var userID = get_userID_from_url();
 var real_upload_btn = document.getElementById("myPhoto");
 
@@ -30,7 +32,7 @@ var real_upload_btn = document.getElementById("myPhoto");
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
 
-     window.location = "../login/index.html";
+     window.location = "../index.html";
   } else {
     userID = user.uid;
     console.log("this line shoud be executed once for each login");
@@ -48,14 +50,30 @@ build_calender();
 
 /* ---------------- Buttons callbacks -------------- */
 
-$("#logout_btn").on("click",function(){
-  firebase.auth().signOut();
-});
+
 
 $("select.home_country").on("click", function(e) {
   homeCountry = $(this).children("option:selected").val();
 
 
+});
+
+$("#logout_btn").on("click", function () {
+  firebase.auth().signOut();
+});
+
+$("#move_to_main").on("click", function () {
+  window.location = "../main/main.html?uid="+userID;
+});
+
+$("#edit_teacher_profile").on("click", function () {
+  var students = firebase.database().ref( "Users/Students/"+userID);
+  students.once("value").then(function(snapshot) {
+    if(snapshot.exists())
+      window.location = "../user/user.html?uid=" + userID;  //if it's True then the user is a student and move to student profile
+    else
+      window.location = "../teacher_page/teacher.html?uid=" + userID; //move to teachers profile
+    }); 
 });
 
 $("#save_btn").on("click",function(){
@@ -100,6 +118,9 @@ function calender_btn_clicked(event){
 
 
 
+  if ($( this ).css( "background-color" ) == bookedColor)
+    return;
+    
   var newColor = availableColor;
 
   if ($( this ).css( "background-color" ) == availableColor)
@@ -132,15 +153,7 @@ $("#date_right").on("click",function(event){
 
 });
 
-// btn for testing only
-$("#test").on("click",function(event){
 
-  var items=document.getElementsByName("teach");
-  for(var i=0; i<items.length; i++){
-    if(items[i].type=='checkbox' && items[i].value=="Akan")
-      items[i].checked = true;
-  }
-});
 
 
 $('input[name=checkbox]').change(function(){
@@ -300,7 +313,14 @@ function updateSlotsColors(){
     var slot = document.getElementById(availableSlots[i])
     if(slot)
       slot.style.background=availableColor;
+  }
 
+  for(var i = 0; i < bookedDates.length; i++){
+    var slot = document.getElementById(bookedDates[i])
+    if(slot){
+      slot.innerText ="Booked";
+      slot.style.background=bookedColor;
+    }
   }
 }
 
@@ -326,22 +346,36 @@ function get_profile_info_from_db(data){
   userEmail = current_teacher['userEmail'];
   imageName =  current_teacher['imageName'];
   newImageName = current_teacher['imageName'];
-   fix_undefined_variavles();
+  bookedClasses = current_teacher['bookedClasses'];
+  fix_undefined_variavles();
 
   $("#homeCountry").val(homeCountry);
   document.getElementById("Name").value = name;
   document.getElementById("lesson_price").value = lessonPrice;
   document.getElementById("about_me").value = about_me;
   document.getElementById("skype_id").value = skype_id;
+
+  update_booked_classes_list();
+
   get_and_update_image_from_db();
-
-  console.log("read also_speak: " + also_speak);
-  console.log("read languages_I_teach: " + languages_I_teach);
-  console.log("read availableSlots: " + availableSlots);
-
+  fill_booked_dates();
   updateSlotsColors();
   update_profile_checkboxes();
 
+
+
+}
+
+function update_booked_classes_list(){
+  console.log("update_booked_classes_list");
+  if(!bookedClasses)
+    return;
+  
+  for( var i =0; i < bookedClasses.length; i++){
+    console.log("update_booked_classes_list i= " + i);
+    var new_li_str = '<li class="list-group-item" style="background-color: rgb(153, 187, 255)">' +bookedClasses[i]+ '</li>';
+    $(".list-group").append(new_li_str);
+  }
 
 }
 
@@ -455,3 +489,18 @@ function update_profile_image(){
 
 
 }
+
+function fill_booked_dates(){
+  for(var i =0; i < bookedClasses.length; i++){
+    var temp = extract_date(bookedClasses[i]);
+    bookedDates.push(temp);
+  }
+}
+
+function extract_date(str){
+  var res = str.substring(0).split(",")[0];
+  res = res.substring(0).split(" ")[1];
+  return res;
+}
+
+
