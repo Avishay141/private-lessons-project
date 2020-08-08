@@ -26,6 +26,12 @@ git commit -m "added index.html"
 
 git push
 
+
+-------------------------------------------------
+in order to reset a file to master run the following:
+
+git checkout master main.js
+
 -----------------------------------------------
 
 in order to show git history in a nice format:
