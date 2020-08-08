@@ -6,7 +6,7 @@ after we installed the heroku CLI we need to do the following:
 
 * nevigate the the root directory of the project.
 
-* run heroku create
+* run the command:  heroku create
 
 * run the command: npm init
 * run the command: npm install body-parser express request
