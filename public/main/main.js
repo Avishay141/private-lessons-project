@@ -7,6 +7,9 @@ var res = [];
 
 
 
+var jokes_button = document.getElementById('jokes_btn');
+var jokes_result = document.getElementById('jokes_res');
+
 
 var userID = get_userID_from_url();
 //var database = firebase.database();
@@ -22,6 +25,34 @@ const
   };
 document.addEventListener("DOMContentLoaded", setValue);
 range.addEventListener('input', setValue);
+
+
+//fetch('https://sv443.net/jokeapi/v2/joke/Any')
+//.then(res=>res.json())
+//.then(data => console.log('aaaaaaaa' + data[0]));
+
+
+jokes_button.addEventListener('click',function(){
+  fetch('https://sv443.net/jokeapi/v2/joke/Any')
+  .then(res => res.json())
+  //.then(data => console.log(data))
+  .then(res =>{
+    var t;
+    if (res['setup'] === undefined || res['delivery']===undefined){
+      t = 'What did the boy with no arms get for Christmas? I don\'t know, he hasn\'t opened it yet.'
+    }else {
+      t = res['setup'] + ' ' + res['delivery'];
+    }
+    jokes_result.innerHTML = t;
+  })
+  //.then(res => {
+  //  
+    //jokes_result.html(t)
+  //})
+.catch(error => console.log("error getting data"));
+});
+
+
 
 
 
