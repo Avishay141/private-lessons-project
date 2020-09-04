@@ -123,7 +123,7 @@ function build_calender(){
   table +='<td class="dates_cells"> Date </td>';
   for(var i =0; i < 7; i++){
         var temp = getDates( weekCalenders[weekCalenderIndx].firstDay);
-        table +='<td class="dates_cells">' + temp[i].getDate()+'/'+(temp[i].getMonth()+1)+'</td>';
+        table +='<td class="dates_cells">' + temp[i].getDate()+'/'+(temp[i].getMonth())+'</td>';
 
   }
   table +="</tr>";
