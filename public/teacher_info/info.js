@@ -149,7 +149,7 @@ function build_calender(){
       if( j == 0 )
             table +='<td class="hours_cells">' +hours[i]+'</td>';
       else{
-        var temp_id = temp[j-1].getDate()+'.'+(temp[j-1].getMonth()+1)+"_day-"+days[j-1]+"_hour-"+hours[i];
+        var temp_id = temp[j-1].getDate()+'.'+(temp[j-1].getMonth())+"_day-"+days[j-1]+"_hour-"+hours[i];
         table += '<td> <button type="button" class="calender_btn"  id="'+temp_id+'"></button></td>';
 
       }
