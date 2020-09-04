@@ -10,8 +10,8 @@ Library           SeleniumLibrary
 ${SERVER}         localhost:7272
 ${BROWSER}        chrome
 ${DELAY}          0
-${LOGIN URL}      C:/Git/Lessons/private-lessons-project/public/login/index.html
-${MAIN_URL}    file:///C:/Git/Lessons/private-lessons-project/public/main/main.html
+${LOGIN URL}      https://calm-peak-58723.herokuapp.com/login/index.html
+${MAIN_URL}    https://calm-peak-58723.herokuapp.com/main/main.html
 ${LOGIN_BTN}       login_btn
 ${LOGOUT_BTN}       logout_btn
 ${SIGNUP_BTN}      sign_up_btn
