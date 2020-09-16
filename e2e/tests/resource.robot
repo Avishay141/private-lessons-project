@@ -167,7 +167,7 @@ Fill Cvc
 Click Payment Order Button
     Click Button Helper  ${PAY_ORDER_BTN}
 
-Success Message Should Appear
+Success Message Should Appear Payment
     Wait Until Page Contains Element   payment-success-ok-btn    15
 
 Click Profile Button
