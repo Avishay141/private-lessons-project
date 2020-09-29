@@ -12,21 +12,40 @@ on:
 
 # A workflow  run is made up of one or more jobs that can run sequentially or in parallel
 jobs:       
-    robot_test2:
+    robot_test:
       runs-on: ubuntu-latest
       name: Run Robot Framework Tests
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Robot Framework run tests
-          uses: joonvena/robotframework-docker-action@v0.1
-          env:
-            BROWSER: chrome
-            ROBOT_TESTS_DIR: e2e/tests
-            ROBOT_REPORTS_DIR: ${{ github.workspace }}/e2e/reports
+        # - name: Robot Framework run tests
+        #   uses: joonvena/robotframework-docker-action@v0.1
+        #   env:
+        #     BROWSER: chrome
+        #     ROBOT_TESTS_DIR: ${{github.workspace}}/e2e/tests
+        - name: Test
+          run: |
+            docker run \
+              -v ${PWD}/reports:/opt/robotframework/reports:Z \
+              -v ${PWD}/e2e/tests:/opt/robotframework/tests:Z \
+              -v ${PWD}/reports/file://opt/robotframework/temp/reports/file/ \
+              --user $(id -u):$(id -g) \
+              ppodgorsek/robot-framework:latest
         - name: Upload test results
           uses: actions/upload-artifact@v1
           if: always()
           with:
             name: reports
-            path: ${{ github.workspace }}/reports
+            path: /opt/robotframework/reports/output.xml
+    deploy_to_heroku:
+        runs-on: ubuntu-latest
+        name: Deploy to Heroku
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Deploy
+              uses: akhileshns/heroku-deploy@v3.5.6
+              with:
+                  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                  heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+                  heroku_email: ${{secrets.HEROKU_EMAIL}}
