@@ -8,7 +8,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${SERVER}         localhost:7272
-${BROWSER}        chrome
+${BROWSER}        chrome    #
 ${DELAY}          0
 ${LOGIN URL}     https://infinite-river-63630.herokuapp.com/login/index.html
 ${MAIN_URL}    https://infinite-river-63630.herokuapp.com/main/main.html
@@ -33,7 +33,7 @@ ${PAY_CARD_CVC_INPUT}   pay-credit-cvc-input
 ${PAY_ORDER_BTN}  orderButton
 ${PROFILE_BUTTON}   edit_teacher_profile
 ${PROFILE_SAVE_CHANGES_BUTTON}   save_btn
-${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[2]/div[4]/div/table
+${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[1]/div[4]/div/table
 ${TEACHER_CALENDAR_TABLE}   xpath://html/body/section/div/div[2]/div/div/table
 *** Keywords ***
 Open Chrome

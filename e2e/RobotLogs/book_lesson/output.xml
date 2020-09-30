@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.1 (Python 3.6.0 on win32)" generated="20200930 21:14:02.447" rpa="false">
+<robot generator="Robot 3.2.1 (Python 3.6.0 on win32)" generated="20200930 21:38:16.657" rpa="false">
 <suite id="s1" name="Book Lesson" source="C:\Git\Lessons\private-lessons-project\e2e\tests\book_lesson.robot">
 <test id="s1-t1" name="Book Lesson expect to pass">
 <kw name="Login" library="resource">
@@ -18,8 +18,8 @@
 <assign>
 <var>${chrome_options}</var>
 </assign>
-<msg timestamp="20200930 21:14:02.767" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x0000021E3BC232B0&gt;</msg>
-<status status="PASS" starttime="20200930 21:14:02.766" endtime="20200930 21:14:02.767"></status>
+<msg timestamp="20200930 21:38:16.985" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x00000224097D22B0&gt;</msg>
+<status status="PASS" starttime="20200930 21:38:16.985" endtime="20200930 21:38:16.985"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -28,7 +28,7 @@
 <arg>add_argument</arg>
 <arg>--disable-extensions</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.767" endtime="20200930 21:14:02.767"></status>
+<status status="PASS" starttime="20200930 21:38:16.985" endtime="20200930 21:38:16.985"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -37,7 +37,7 @@
 <arg>add_argument</arg>
 <arg>--headless</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.767" endtime="20200930 21:14:02.768"></status>
+<status status="PASS" starttime="20200930 21:38:16.986" endtime="20200930 21:38:16.986"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -46,7 +46,7 @@
 <arg>add_argument</arg>
 <arg>--disable-gpu</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.768" endtime="20200930 21:14:02.768"></status>
+<status status="PASS" starttime="20200930 21:38:16.986" endtime="20200930 21:38:16.986"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -55,7 +55,7 @@
 <arg>add_argument</arg>
 <arg>--no-sandbox</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.768" endtime="20200930 21:14:02.768"></status>
+<status status="PASS" starttime="20200930 21:38:16.986" endtime="20200930 21:38:16.987"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -64,7 +64,7 @@
 <arg>add_argument</arg>
 <arg>--disable-accelerated-2d-canvas</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.769" endtime="20200930 21:14:02.769"></status>
+<status status="PASS" starttime="20200930 21:38:16.987" endtime="20200930 21:38:16.987"></status>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <doc>Calls the named method of the given object with the provided arguments.</doc>
@@ -73,7 +73,7 @@
 <arg>add_argument</arg>
 <arg>--disable-accelerated-jpeg-decoding</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:02.769" endtime="20200930 21:14:02.769"></status>
+<status status="PASS" starttime="20200930 21:38:16.987" endtime="20200930 21:38:16.988"></status>
 </kw>
 <kw name="Create Webdriver" library="SeleniumLibrary">
 <doc>Creates an instance of Selenium WebDriver.</doc>
@@ -81,10 +81,10 @@
 <arg>Chrome</arg>
 <arg>chrome_options=${chrome_options}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:02.770" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
-<status status="PASS" starttime="20200930 21:14:02.769" endtime="20200930 21:14:05.874"></status>
+<msg timestamp="20200930 21:38:16.988" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" starttime="20200930 21:38:16.988" endtime="20200930 21:38:20.100"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:02.766" endtime="20200930 21:14:05.875"></status>
+<status status="PASS" starttime="20200930 21:38:16.984" endtime="20200930 21:38:20.101"></status>
 </kw>
 <kw name="Go To Login Page" library="resource">
 <kw name="Go To" library="SeleniumLibrary">
@@ -92,8 +92,8 @@
 <arguments>
 <arg>${LOGIN URL}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:05.875" level="INFO">Opening url 'https://infinite-river-63630.herokuapp.com/login/index.html'</msg>
-<status status="PASS" starttime="20200930 21:14:05.875" endtime="20200930 21:14:36.224"></status>
+<msg timestamp="20200930 21:38:20.101" level="INFO">Opening url 'https://infinite-river-63630.herokuapp.com/login/index.html'</msg>
+<status status="PASS" starttime="20200930 21:38:20.101" endtime="20200930 21:38:55.661"></status>
 </kw>
 <kw name="Login Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
@@ -101,19 +101,19 @@
 <arguments>
 <arg>Languages</arg>
 </arguments>
-<msg timestamp="20200930 21:14:36.232" level="INFO">Page title is 'Languages'.</msg>
-<status status="PASS" starttime="20200930 21:14:36.225" endtime="20200930 21:14:36.232"></status>
+<msg timestamp="20200930 21:38:55.670" level="INFO">Page title is 'Languages'.</msg>
+<status status="PASS" starttime="20200930 21:38:55.662" endtime="20200930 21:38:55.670"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.225" endtime="20200930 21:14:36.233"></status>
+<status status="PASS" starttime="20200930 21:38:55.661" endtime="20200930 21:38:55.670"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:05.875" endtime="20200930 21:14:36.233"></status>
+<status status="PASS" starttime="20200930 21:38:20.101" endtime="20200930 21:38:55.670"></status>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <doc>Sets the delay that is waited after each Selenium command.</doc>
 <arguments>
 <arg>${DELAY}</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:36.233" endtime="20200930 21:14:36.234"></status>
+<status status="PASS" starttime="20200930 21:38:55.671" endtime="20200930 21:38:55.671"></status>
 </kw>
 <kw name="Login Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
@@ -121,12 +121,12 @@
 <arguments>
 <arg>Languages</arg>
 </arguments>
-<msg timestamp="20200930 21:14:36.242" level="INFO">Page title is 'Languages'.</msg>
-<status status="PASS" starttime="20200930 21:14:36.235" endtime="20200930 21:14:36.242"></status>
+<msg timestamp="20200930 21:38:55.679" level="INFO">Page title is 'Languages'.</msg>
+<status status="PASS" starttime="20200930 21:38:55.672" endtime="20200930 21:38:55.679"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.234" endtime="20200930 21:14:36.243"></status>
+<status status="PASS" starttime="20200930 21:38:55.671" endtime="20200930 21:38:55.680"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:02.766" endtime="20200930 21:14:36.243"></status>
+<status status="PASS" starttime="20200930 21:38:16.984" endtime="20200930 21:38:55.680"></status>
 </kw>
 <kw name="Input Username" library="resource">
 <arguments>
@@ -138,10 +138,10 @@
 <arg>email</arg>
 <arg>${username}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:36.244" level="INFO">Typing text 's@s.com' into text field 'email'.</msg>
-<status status="PASS" starttime="20200930 21:14:36.244" endtime="20200930 21:14:36.383"></status>
+<msg timestamp="20200930 21:38:55.682" level="INFO">Typing text 's@s.com' into text field 'email'.</msg>
+<status status="PASS" starttime="20200930 21:38:55.681" endtime="20200930 21:38:55.823"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.243" endtime="20200930 21:14:36.384"></status>
+<status status="PASS" starttime="20200930 21:38:55.680" endtime="20200930 21:38:55.823"></status>
 </kw>
 <kw name="Input Password" library="resource">
 <arguments>
@@ -153,10 +153,10 @@
 <arg>password</arg>
 <arg>${password}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:36.385" level="INFO">Typing text '123123' into text field 'password'.</msg>
-<status status="PASS" starttime="20200930 21:14:36.385" endtime="20200930 21:14:36.486"></status>
+<msg timestamp="20200930 21:38:55.825" level="INFO">Typing text '123123' into text field 'password'.</msg>
+<status status="PASS" starttime="20200930 21:38:55.824" endtime="20200930 21:38:55.926"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.384" endtime="20200930 21:14:36.486"></status>
+<status status="PASS" starttime="20200930 21:38:55.823" endtime="20200930 21:38:55.927"></status>
 </kw>
 <kw name="Click Button Helper" library="resource">
 <arguments>
@@ -168,19 +168,19 @@
 <arg>${button_id}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:36.487" endtime="20200930 21:14:36.503"></status>
+<status status="PASS" starttime="20200930 21:38:55.927" endtime="20200930 21:38:55.942"></status>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <doc>Clicks the button identified by ``locator``.</doc>
 <arguments>
 <arg>${button_id}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:36.503" level="INFO">Clicking button 'login_btn'.</msg>
-<status status="PASS" starttime="20200930 21:14:36.503" endtime="20200930 21:14:36.590"></status>
+<msg timestamp="20200930 21:38:55.943" level="INFO">Clicking button 'login_btn'.</msg>
+<status status="PASS" starttime="20200930 21:38:55.943" endtime="20200930 21:38:56.026"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.486" endtime="20200930 21:14:36.591"></status>
+<status status="PASS" starttime="20200930 21:38:55.927" endtime="20200930 21:38:56.027"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:02.765" endtime="20200930 21:14:36.591"></status>
+<status status="PASS" starttime="20200930 21:38:16.983" endtime="20200930 21:38:56.027"></status>
 </kw>
 <kw name="Main Page Should Be Open" library="resource">
 <kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
@@ -189,9 +189,9 @@
 <arg>${LOGOUT_BTN}</arg>
 <arg>10</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:36.592" endtime="20200930 21:14:38.219"></status>
+<status status="PASS" starttime="20200930 21:38:56.028" endtime="20200930 21:38:57.952"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:36.591" endtime="20200930 21:14:38.219"></status>
+<status status="PASS" starttime="20200930 21:38:56.028" endtime="20200930 21:38:57.953"></status>
 </kw>
 <kw name="Select Language" library="resource">
 <arguments>
@@ -203,10 +203,10 @@
 <arg>${SEARCH_LANG_LIST}</arg>
 <arg>${input_val}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:38.221" level="INFO">Selecting options from selection list 'ddl_language' by value Acholi.</msg>
-<status status="PASS" starttime="20200930 21:14:38.220" endtime="20200930 21:14:38.311"></status>
+<msg timestamp="20200930 21:38:57.955" level="INFO">Selecting options from selection list 'ddl_language' by value Acholi.</msg>
+<status status="PASS" starttime="20200930 21:38:57.954" endtime="20200930 21:38:58.050"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.220" endtime="20200930 21:14:38.311"></status>
+<status status="PASS" starttime="20200930 21:38:57.953" endtime="20200930 21:38:58.050"></status>
 </kw>
 <kw name="Select Teacher Origin" library="resource">
 <arguments>
@@ -218,10 +218,10 @@
 <arg>${SEARCH_ORIGIN_LIST}</arg>
 <arg>${input_val}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:38.313" level="INFO">Selecting options from selection list 'ddl_origin' by value Afghanistan.</msg>
-<status status="PASS" starttime="20200930 21:14:38.312" endtime="20200930 21:14:38.403"></status>
+<msg timestamp="20200930 21:38:58.052" level="INFO">Selecting options from selection list 'ddl_origin' by value Afghanistan.</msg>
+<status status="PASS" starttime="20200930 21:38:58.051" endtime="20200930 21:38:58.144"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.312" endtime="20200930 21:14:38.403"></status>
+<status status="PASS" starttime="20200930 21:38:58.051" endtime="20200930 21:38:58.145"></status>
 </kw>
 <kw name="Click Search Teacher Button" library="resource">
 <kw name="Click Button Helper" library="resource">
@@ -234,19 +234,19 @@
 <arg>${button_id}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:38.406" endtime="20200930 21:14:38.425"></status>
+<status status="PASS" starttime="20200930 21:38:58.146" endtime="20200930 21:38:58.163"></status>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <doc>Clicks the button identified by ``locator``.</doc>
 <arguments>
 <arg>${button_id}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:38.426" level="INFO">Clicking button 'searchBtn'.</msg>
-<status status="PASS" starttime="20200930 21:14:38.426" endtime="20200930 21:14:38.518"></status>
+<msg timestamp="20200930 21:38:58.164" level="INFO">Clicking button 'searchBtn'.</msg>
+<status status="PASS" starttime="20200930 21:38:58.163" endtime="20200930 21:38:58.249"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.405" endtime="20200930 21:14:38.518"></status>
+<status status="PASS" starttime="20200930 21:38:58.145" endtime="20200930 21:38:58.249"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.404" endtime="20200930 21:14:38.519"></status>
+<status status="PASS" starttime="20200930 21:38:58.145" endtime="20200930 21:38:58.249"></status>
 </kw>
 <kw name="Select Teacher Profile" library="resource">
 <kw name="Click Button Helper" library="resource">
@@ -259,23 +259,23 @@
 <arg>${button_id}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:38.520" endtime="20200930 21:14:39.389"></status>
+<status status="PASS" starttime="20200930 21:38:58.251" endtime="20200930 21:38:59.319"></status>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <doc>Clicks the button identified by ``locator``.</doc>
 <arguments>
 <arg>${button_id}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:39.390" level="INFO">Clicking button 'lCF3MT5PhvUAJyPT4irwxNu7jok1'.</msg>
-<status status="PASS" starttime="20200930 21:14:39.389" endtime="20200930 21:14:40.091"></status>
+<msg timestamp="20200930 21:38:59.319" level="INFO">Clicking button 'lCF3MT5PhvUAJyPT4irwxNu7jok1'.</msg>
+<status status="PASS" starttime="20200930 21:38:59.319" endtime="20200930 21:38:59.989"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.520" endtime="20200930 21:14:40.091"></status>
+<status status="PASS" starttime="20200930 21:38:58.251" endtime="20200930 21:38:59.989"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:38.519" endtime="20200930 21:14:40.092"></status>
+<status status="PASS" starttime="20200930 21:38:58.250" endtime="20200930 21:38:59.989"></status>
 </kw>
 <kw name="Click Wanted Date" library="resource">
 <arguments>
-<arg>xpath://html/body/section/div/div[2]/div/div/table/tr[4]/td[4]/button</arg>
+<arg>xpath://html/body/section/div/div[2]/div/div/table/tr[3]/td[4]/button</arg>
 </arguments>
 <kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
@@ -283,15 +283,15 @@
 <arg>${TEACHER_CALENDAR_TABLE}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:40.095" endtime="20200930 21:14:40.123"></status>
+<status status="PASS" starttime="20200930 21:38:59.991" endtime="20200930 21:39:00.036"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>10 seconds</arg>
 </arguments>
-<msg timestamp="20200930 21:14:50.126" level="INFO">Slept 10 seconds</msg>
-<status status="PASS" starttime="20200930 21:14:40.123" endtime="20200930 21:14:50.126"></status>
+<msg timestamp="20200930 21:39:10.038" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" starttime="20200930 21:39:00.037" endtime="20200930 21:39:10.038"></status>
 </kw>
 <kw name="Click Button Helper" library="resource">
 <arguments>
@@ -303,19 +303,19 @@
 <arg>${button_id}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:50.127" endtime="20200930 21:14:50.143"></status>
+<status status="PASS" starttime="20200930 21:39:10.039" endtime="20200930 21:39:10.054"></status>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <doc>Clicks the button identified by ``locator``.</doc>
 <arguments>
 <arg>${button_id}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:50.143" level="INFO">Clicking button 'xpath://html/body/section/div/div[2]/div/div/table/tr[4]/td[4]/button'.</msg>
-<status status="PASS" starttime="20200930 21:14:50.143" endtime="20200930 21:14:50.220"></status>
+<msg timestamp="20200930 21:39:10.055" level="INFO">Clicking button 'xpath://html/body/section/div/div[2]/div/div/table/tr[3]/td[4]/button'.</msg>
+<status status="PASS" starttime="20200930 21:39:10.055" endtime="20200930 21:39:10.137"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:50.126" endtime="20200930 21:14:50.220"></status>
+<status status="PASS" starttime="20200930 21:39:10.038" endtime="20200930 21:39:10.138"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:40.094" endtime="20200930 21:14:50.220"></status>
+<status status="PASS" starttime="20200930 21:38:59.990" endtime="20200930 21:39:10.138"></status>
 </kw>
 <kw name="Click Book Lesson" library="resource">
 <kw name="Click Button Helper" library="resource">
@@ -328,19 +328,19 @@
 <arg>${button_id}</arg>
 <arg>20</arg>
 </arguments>
-<status status="PASS" starttime="20200930 21:14:50.223" endtime="20200930 21:14:50.238"></status>
+<status status="PASS" starttime="20200930 21:39:10.140" endtime="20200930 21:39:10.157"></status>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <doc>Clicks the button identified by ``locator``.</doc>
 <arguments>
 <arg>${button_id}</arg>
 </arguments>
-<msg timestamp="20200930 21:14:50.239" level="INFO">Clicking button 'book_btn'.</msg>
-<status status="PASS" starttime="20200930 21:14:50.238" endtime="20200930 21:14:50.321"></status>
+<msg timestamp="20200930 21:39:10.157" level="INFO">Clicking button 'book_btn'.</msg>
+<status status="PASS" starttime="20200930 21:39:10.157" endtime="20200930 21:39:11.167"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:50.222" endtime="20200930 21:14:50.321"></status>
+<status status="PASS" starttime="20200930 21:39:10.140" endtime="20200930 21:39:11.167"></status>
 </kw>
-<status status="PASS" starttime="20200930 21:14:50.221" endtime="20200930 21:14:50.321"></status>
+<status status="PASS" starttime="20200930 21:39:10.139" endtime="20200930 21:39:11.168"></status>
 </kw>
 <kw name="Payment Page Should Be Open" library="resource">
 <kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
@@ -349,33 +349,168 @@
 <arg>${PAY_CARD_NAME_INPUT}</arg>
 <arg>20</arg>
 </arguments>
-<kw name="Capture Page Screenshot" library="SeleniumLibrary">
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<msg timestamp="20200930 21:15:10.743" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<status status="PASS" starttime="20200930 21:15:10.525" endtime="20200930 21:15:10.744"></status>
+<status status="PASS" starttime="20200930 21:39:11.169" endtime="20200930 21:39:11.187"></status>
 </kw>
-<msg timestamp="20200930 21:15:10.746" level="FAIL">Element 'pay-credit-name-input' did not appear in 20 seconds.</msg>
-<status status="FAIL" starttime="20200930 21:14:50.322" endtime="20200930 21:15:10.747"></status>
+<status status="PASS" starttime="20200930 21:39:11.168" endtime="20200930 21:39:11.187"></status>
 </kw>
-<status status="FAIL" starttime="20200930 21:14:50.322" endtime="20200930 21:15:10.747"></status>
+<kw name="Fill Name On Card" library="resource">
+<arguments>
+<arg>Prince</arg>
+</arguments>
+<kw name="Input helper" library="resource">
+<arguments>
+<arg>${PAY_CARD_NAME_INPUT}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${input_id}</arg>
+</arguments>
+<status status="PASS" starttime="20200930 21:39:11.189" endtime="20200930 21:39:11.200"></status>
 </kw>
-<status status="FAIL" starttime="20200930 21:14:02.764" endtime="20200930 21:15:10.748" critical="yes">Element 'pay-credit-name-input' did not appear in 20 seconds.</status>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${input_id}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<msg timestamp="20200930 21:39:11.201" level="INFO">Typing text 'Prince' into text field 'pay-credit-name-input'.</msg>
+<status status="PASS" starttime="20200930 21:39:11.200" endtime="20200930 21:39:11.311"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.188" endtime="20200930 21:39:11.311"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.188" endtime="20200930 21:39:11.312"></status>
+</kw>
+<kw name="Fill Email" library="resource">
+<arguments>
+<arg>p@p.com</arg>
+</arguments>
+<kw name="Input helper" library="resource">
+<arguments>
+<arg>${PAY_EMAIL_INPUT}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${input_id}</arg>
+</arguments>
+<status status="PASS" starttime="20200930 21:39:11.314" endtime="20200930 21:39:11.330"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${input_id}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<msg timestamp="20200930 21:39:11.331" level="INFO">Typing text 'p@p.com' into text field 'pay-credit-email-input'.</msg>
+<status status="PASS" starttime="20200930 21:39:11.330" endtime="20200930 21:39:11.443"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.313" endtime="20200930 21:39:11.443"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.312" endtime="20200930 21:39:11.443"></status>
+</kw>
+<kw name="Fill Credit Card" library="resource">
+<arguments>
+<arg>1234123412341234</arg>
+</arguments>
+<kw name="Input helper" library="resource">
+<arguments>
+<arg>${PAY_CARD_NUMBER_INPUT}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${input_id}</arg>
+</arguments>
+<status status="PASS" starttime="20200930 21:39:11.445" endtime="20200930 21:39:11.460"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${input_id}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<msg timestamp="20200930 21:39:11.461" level="INFO">Typing text '1234123412341234' into text field 'pay-credit-number-input'.</msg>
+<status status="PASS" starttime="20200930 21:39:11.461" endtime="20200930 21:39:11.589"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.444" endtime="20200930 21:39:11.590"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.444" endtime="20200930 21:39:11.590"></status>
+</kw>
+<kw name="Fill Cvc" library="resource">
+<arguments>
+<arg>234</arg>
+</arguments>
+<kw name="Input helper" library="resource">
+<arguments>
+<arg>${PAY_CARD_CVC_INPUT}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${input_id}</arg>
+</arguments>
+<status status="PASS" starttime="20200930 21:39:11.592" endtime="20200930 21:39:11.608"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${input_id}</arg>
+<arg>${input_val}</arg>
+</arguments>
+<msg timestamp="20200930 21:39:11.609" level="INFO">Typing text '234' into text field 'pay-credit-cvc-input'.</msg>
+<status status="PASS" starttime="20200930 21:39:11.608" endtime="20200930 21:39:11.711"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.591" endtime="20200930 21:39:11.711"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.590" endtime="20200930 21:39:11.711"></status>
+</kw>
+<kw name="Click Payment Order Button" library="resource">
+<kw name="Click Button Helper" library="resource">
+<arguments>
+<arg>${PAY_ORDER_BTN}</arg>
+</arguments>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>${button_id}</arg>
+<arg>20</arg>
+</arguments>
+<status status="PASS" starttime="20200930 21:39:11.713" endtime="20200930 21:39:11.730"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>${button_id}</arg>
+</arguments>
+<msg timestamp="20200930 21:39:11.730" level="INFO">Clicking button 'orderButton'.</msg>
+<status status="PASS" starttime="20200930 21:39:11.730" endtime="20200930 21:39:11.839"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.712" endtime="20200930 21:39:11.840"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:39:11.712" endtime="20200930 21:39:11.840"></status>
+</kw>
+<status status="PASS" starttime="20200930 21:38:16.982" endtime="20200930 21:39:11.842" critical="yes"></status>
 </test>
 <doc>A test suite with a single test for valid login.
 
 This test has a workflow that is created using keywords in
 the imported resource file.</doc>
-<status status="FAIL" starttime="20200930 21:14:02.449" endtime="20200930 21:15:10.751"></status>
+<status status="PASS" starttime="20200930 21:38:16.660" endtime="20200930 21:39:11.844"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1">Critical Tests</stat>
-<stat pass="0" fail="1">All Tests</stat>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" id="s1" name="Book Lesson">Book Lesson</stat>
+<stat pass="1" fail="0" id="s1" name="Book Lesson">Book Lesson</stat>
 </suite>
 </statistics>
 <errors>
