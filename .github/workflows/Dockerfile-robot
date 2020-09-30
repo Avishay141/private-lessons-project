@@ -1,9 +1,17 @@
-FROM python
+FROM debian
 
-RUN pip3 install robotframework robotframework-selenium2library && apt install -y wget unzip && wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x ./chromedriver && mv chromedriver /usr/local/bin 
-
-WORKDIR /opt/robotframework/tests
+RUN apt-get update && apt-get install --quiet --assume-yes python-dev python-pip unzip wget && \
+  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  apt update && \
+  pip install robotframework robotframework-selenium2library robotframework-seleniumlibrary selenium && \
+  apt install -y google-chrome-stable && \
+  CHROMEDRIVER_VERSION=`wget --no-verbose --output-document - https://chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+  wget --no-verbose --output-document /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
+  unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver && \
+  chmod +x /opt/chromedriver/chromedriver && \
+  ln -fs /opt/chromedriver/chromedriver /usr/local/bin/chromedriver
 
 COPY . .
 
-ENTRYPOINT robot .
+ENTRYPOINT robot -v BROWSER:HeadlessChrome -v APP_ENV:test -d reports e2e/
