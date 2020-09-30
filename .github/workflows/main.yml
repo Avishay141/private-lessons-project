@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actionss
+# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -18,24 +18,21 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Integration tests prepare
+        - name: test
           run: |
-              docker build -t myrobot --file .github/workflows/Dockerfile-robot .
-        - name: Integration tests
-          run: |
-            docker run \
-              -v ${PWD}/reports:/opt/robotframework/reports:Z \
-              -v ${PWD}/e2e/:/opt/robotframework/tests:Z \
-              myrobot
+            mkdir ${{github.workspace}}/reports
+            docker run --shm-size=1g -e BROWSER=headlesschrome \
+            -v ${{github.workspace}}/e2e:/opt/robotframework/tests:Z \
+            -v ${{github.workspace}}/reports:/opt/robotframework/reports:Z \
+            --user 1001:1000 \
+            ppodgorsek/robot-framework:latest
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
           with:
             name: reports
             path: |
-              e2e/output.xml
-              e2e/report.html
-              e2e/log.html
+              reports
     deploy:
         runs-on: ubuntu-latest
         name: Deploy
