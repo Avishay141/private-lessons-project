@@ -1,0 +1,9 @@
+FROM python
+
+RUN pip3 install robotframework robotframework-selenium2library && apt install -y wget unzip && wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x ./chromedriver && mv chromedriver /usr/local/bin 
+
+WORKDIR /opt/robotframework/tests
+
+COPY . .
+
+ENTRYPOINT robot .

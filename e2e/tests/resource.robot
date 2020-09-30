@@ -8,10 +8,10 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${SERVER}         localhost:7272
-${BROWSER}        chrome
+${BROWSER}        headLesschrome
 ${DELAY}          0
-${LOGIN URL}      https://calm-peak-58723.herokuapp.com/login/index.html
-${MAIN_URL}    https://calm-peak-58723.herokuapp.com/main/main.html
+${LOGIN URL}      https://infinite-river-63630.herokuapp.com/login/index.html
+${MAIN_URL}    https://infinite-river-63630.herokuapp.com/main/main.html
 ${LOGIN_BTN}       login_btn
 ${LOGOUT_BTN}       logout_btn
 ${SIGNUP_BTN}      sign_up_btn

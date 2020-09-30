@@ -11,35 +11,34 @@ on:
     branches: [ master ]
 
 # A workflow  run is made up of one or more jobs that can run sequentially or in parallel
-jobs:       
-    robot_test:
+jobs:
+    test:
       runs-on: ubuntu-latest
-      name: Run Robot Framework Tests
+      name: Integration tests
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        # - name: Robot Framework run tests
-        #   uses: joonvena/robotframework-docker-action@v0.1
-        #   env:
-        #     BROWSER: chrome
-        #     ROBOT_TESTS_DIR: ${{github.workspace}}/e2e/tests
-        - name: Test
+        - name: Integration tests prepare
+          run: |
+              docker build -t myrobot --file .github/workflows/Dockerfile-robot .
+        - name: Integration tests
           run: |
             docker run \
               -v ${PWD}/reports:/opt/robotframework/reports:Z \
-              -v ${PWD}/e2e/tests:/opt/robotframework/tests:Z \
-              -v ${PWD}/reports/file://opt/robotframework/temp/reports/file/ \
-              --user $(id -u):$(id -g) \
-              ppodgorsek/robot-framework:latest
+              -v ${PWD}/e2e/:/opt/robotframework/tests:Z \
+              myrobot
         - name: Upload test results
-          uses: actions/upload-artifact@v1
+          uses: actions/upload-artifact@v2
           if: always()
           with:
             name: reports
-            path: /opt/robotframework/reports/output.xml
-    deploy_to_heroku:
+            path: |
+              e2e/output.xml
+              e2e/report.html
+              e2e/log.html
+    deploy:
         runs-on: ubuntu-latest
-        name: Deploy to Heroku
+        name: Deploy
         steps:
             - name: Checkout
               uses: actions/checkout@v2
