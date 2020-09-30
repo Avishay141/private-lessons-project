@@ -10,8 +10,8 @@ Library           SeleniumLibrary
 ${SERVER}         localhost:7272
 ${BROWSER}        headLesschrome
 ${DELAY}          0
-${LOGIN URL}      https://infinite-river-63630.herokuapp.com/login/index.html
-${MAIN_URL}    https://infinite-river-63630.herokuapp.com/main/main.html
+${LOGIN URL}      https://calm-peak-58723.herokuapp.com/login/index.html
+${MAIN_URL}    https://calm-peak-58723.herokuapp.com/main/main.html
 ${LOGIN_BTN}       login_btn
 ${LOGOUT_BTN}       logout_btn
 ${SIGNUP_BTN}      sign_up_btn
@@ -36,6 +36,17 @@ ${PROFILE_SAVE_CHANGES_BUTTON}   save_btn
 ${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[1]/div[4]/div/table
 ${TEACHER_CALENDAR_TABLE}   xpath://html/body/section/div/div[2]/div/div/table
 *** Keywords ***
+Open Chrome
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --disable-extensions
+    Call Method    ${chrome_options}    add_argument    --headless
+    Call Method    ${chrome_options}    add_argument    --disable-gpu
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-accelerated-2d-canvas
+    Call Method    ${chrome_options}    add_argument    --disable-accelerated-jpeg-decoding
+
+    Create Webdriver    Chrome    chrome_options=${chrome_options}
+
 Valid Login
     Login   s@s.com    123123
     Main Page Should Be Open
@@ -54,7 +65,8 @@ Logout
     Run Keyword If   ${c}>0      Click Button Helper  ${LOGOUT_BTN}
 
 Open Browser To Login Page
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Open Chrome    
+    Go To Login Page
     #Maximize Browser Window
     Set Selenium Speed    ${DELAY}
     Login Page Should Be Open
@@ -178,4 +190,3 @@ Click Schedule Save Changes
 
 Success Scheduling Should Appear
     Wait Until Page Contains Element  xpath://html/body/div[2]/div/div/div[2]/button   15
-
